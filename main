@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City of Calder Ford (Fictional)</title>
+<meta name="description" content="A fictional municipal website template for storytelling. Calder Ford is not a real place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!--
+  ============================================================
+  TEMPLATE NOTES
+  - Calder Ford is an invented city on the invented Sable River.
+    Rename it by searching for "Calder Ford" and "Sable River"
+    and replacing them everywhere.
+  - Recolor the whole site from the :root variables below.
+  - Phone numbers use the 555-01xx range reserved for fiction.
+  - The "fiction notice" bar and footer note are meant to stay.
+  - This page has no logins, payments, or data-collecting forms.
+    All links point to "#" so you can wire them to your own pages.
+  ============================================================
+-->
+
+<style>
+:root{
+  --river:       #1B3F5C;   /* primary: deep river blue */
+  --river-ink:   #0E2538;
+  --mist:        #DCE9F0;   /* light surface */
+  --foam:        #F5F9FB;   /* page background */
+  --flood:       #E4572E;   /* alerts, key accent */
+  --brass:       #C9962B;   /* seal / secondary accent */
+  --ink:         #1A2E3D;   /* body text */
+  --muted:       #50667A;
+  --line:        #C5D5E0;
+  --white:       #FFFFFF;
+  --radius:      3px;
+  --wrap:        1140px;
+  --head: "Zilla Slab", Georgia, "Times New Roman", serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--foam);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+a{color:var(--river);text-underline-offset:3px}
+a:hover{color:var(--flood)}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--head);line-height:1.15;margin:0 0 .5em;color:var(--river-ink)}
+h1{font-size:clamp(2rem,4.6vw,3.2rem);font-weight:700}
+h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0 0 1em;max-width:68ch}
+.skip{position:absolute;left:-999px;top:8px;background:var(--white);padding:8px 12px;z-index:100}
+.skip:focus{left:8px}
+
+/* Fiction notice */
+.fiction{background:var(--ink);color:#EAF1F6;font-size:.85rem}
+.fiction .wrap{display:flex;gap:10px;align-items:center;padding-top:7px;padding-bottom:7px}
+.fiction strong{color:var(--brass)}
+
+/* Header */
+.masthead{background:var(--white);border-bottom:1px solid var(--line)}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:16px;padding-bottom:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--river-ink)}
+.brand svg{width:58px;height:58px;flex:none}
+.brand b{display:block;font-family:var(--head);font-size:1.7rem;line-height:1;letter-spacing:.01em}
+.brand span{display:block;font-size:.85rem;color:var(--muted);margin-top:4px}
+.util{display:flex;gap:18px;align-items:center;font-size:.92rem;flex-wrap:wrap}
+.util a{color:var(--river-ink);text-decoration:none;font-weight:500}
+.util a:hover{text-decoration:underline}
+.util .call{background:var(--river);color:var(--white);padding:8px 14px;border-radius:var(--radius)}
+.util .call:hover{background:var(--flood);color:var(--white);text-decoration:none}
+
+nav.main{background:var(--river)}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
+nav.main a{display:block;color:var(--white);text-decoration:none;padding:13px 18px;font-weight:500;font-size:.98rem;border-bottom:3px solid transparent}
+nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--brass);background:var(--river-ink);color:var(--white)}
+
+/* Alert */
+.alert{background:#FFF1EC;border-bottom:1px solid #F3C4B5}
+.alert .wrap{display:flex;gap:14px;align-items:flex-start;padding-top:12px;padding-bottom:12px}
+.alert .tag{background:var(--flood);color:var(--white);font-weight:700;font-size:.8rem;padding:3px 9px;border-radius:var(--radius);white-space:nowrap;margin-top:2px}
+.alert p{margin:0;max-width:none;font-size:.97rem}
+
+/* Hero */
+.hero{padding:56px 0 36px}
+.hero .grid{display:grid;grid-template-columns:1.25fr .9fr;gap:44px;align-items:start}
+.hero p.lede{font-size:1.15rem;color:var(--muted)}
+.finder{margin-top:24px}
+.finder label{display:block;font-weight:600;margin-bottom:8px}
+.finder .row{display:flex;gap:0;max-width:560px}
+.finder input{flex:1;font:inherit;padding:14px 16px;border:2px solid var(--river);border-right:0;border-radius:var(--radius) 0 0 var(--radius);background:var(--white);min-width:0}
+.finder button{font:inherit;font-weight:600;padding:0 22px;background:var(--river);color:var(--white);border:2px solid var(--river);border-radius:0 var(--radius) var(--radius) 0;cursor:pointer}
+.finder button:hover{background:var(--flood);border-color:var(--flood)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:.92rem}
+.chips a{background:var(--mist);color:var(--river-ink);padding:5px 12px;border-radius:99px;text-decoration:none}
+.chips a:hover{background:var(--river);color:var(--white)}
+
+/* Today panel: the memorable element */
+.today{background:var(--river);color:#E8F0F6;border-radius:var(--radius);padding:22px 24px;position:relative;overflow:hidden}
+.today::after{content:"";position:absolute;inset:auto -10% -22px -10%;height:44px;background:
+  radial-gradient(circle at 12px -4px,transparent 14px,rgba(255,255,255,.07) 15px) 0 0/48px 44px repeat-x}
+.today h2{color:var(--white);font-size:1.3rem;margin-bottom:14px}
+.today dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:.97rem}
+.today dt{color:#A9C1D3;font-weight:500}
+.today dd{margin:0;font-weight:600;color:var(--white)}
+.today .ok{color:#9FE0B8}
+.today .warn{color:#FFB59E}
+.today small{display:block;margin-top:16px;color:#A9C1D3;font-size:.82rem;position:relative;z-index:1}
+
+/* Sections */
+section.block{padding:44px 0}
+section.block.alt{background:var(--mist)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.head a{font-weight:600}
+
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--river);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--ink);display:block}
+.svc:hover{border-top-color:var(--flood);box-shadow:0 4px 14px rgba(14,37,56,.1)}
+.svc h3{margin-bottom:6px;color:var(--river)}
+.svc p{margin:0;font-size:.94rem;color:var(--muted)}
+
+.cols{display:grid;grid-template-columns:1.6fr 1fr;gap:40px}
+.news article{padding:18px 0;border-bottom:1px solid var(--line)}
+.news article:first-child{padding-top:0}
+.news time{font-size:.85rem;color:var(--muted);font-weight:500}
+.news h3 a{text-decoration:none}
+.news h3 a:hover{text-decoration:underline}
+.news p{margin:4px 0 0;color:var(--muted);font-size:.97rem}
+
+.meetings{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.meetings ul{list-style:none;margin:0;padding:0}
+.meetings li{display:grid;grid-template-columns:58px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.meetings li:last-child{border-bottom:0}
+.date{background:var(--mist);border-radius:var(--radius);text-align:center;padding:6px 0;line-height:1.1}
+.date b{display:block;font-family:var(--head);font-size:1.4rem;color:var(--river)}
+.date span{font-size:.78rem;font-weight:600;color:var(--muted)}
+.meetings strong{display:block;font-weight:600}
+.meetings small{color:var(--muted)}
+
+.mayor{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.portrait{aspect-ratio:4/5;border-radius:var(--radius);background:
+  linear-gradient(180deg,#B9CFDF,#8FB0C8);display:grid;place-items:center;color:var(--river);font-family:var(--head);font-size:3.2rem;font-weight:700}
+.mayor blockquote{margin:0 0 14px;font-family:var(--head);font-size:1.35rem;line-height:1.35;color:var(--river-ink);max-width:48ch}
+.mayor cite{font-style:normal;font-weight:600}
+
+.agencies{columns:3;column-gap:32px;list-style:none;margin:0;padding:0}
+.agencies li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
+.agencies a{text-decoration:none;font-weight:500}
+.agencies a:hover{text-decoration:underline}
+
+.report{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.report a{display:block;background:var(--river);color:var(--white);padding:22px;border-radius:var(--radius);text-decoration:none}
+.report a:hover{background:var(--flood);color:var(--white)}
+.report b{font-family:var(--head);font-size:1.25rem;display:block;margin-bottom:4px}
+.report span{font-size:.93rem;opacity:.9}
+
+/* Footer */
+footer{background:var(--river-ink);color:#CFDDE8;padding:40px 0 28px;margin-top:20px}
+footer .grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
+footer h3{color:var(--white);font-size:1rem;margin-bottom:10px}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin:6px 0}
+footer a{color:#CFDDE8}
+footer a:hover{color:var(--white)}
+footer .fine{border-top:1px solid rgba(255,255,255,.18);margin-top:28px;padding-top:18px;font-size:.88rem}
+footer .fine strong{color:var(--brass)}
+
+@media (max-width:900px){
+  .hero .grid,.cols{grid-template-columns:1fr}
+  .services{grid-template-columns:repeat(2,1fr)}
+  .report{grid-template-columns:1fr}
+  .agencies{columns:2}
+  footer .grid{grid-template-columns:1fr 1fr}
+  .mayor{grid-template-columns:1fr}
+  .portrait{max-width:180px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .services{grid-template-columns:1fr}
+  .agencies{columns:1}
+  footer .grid{grid-template-columns:1fr}
+  nav.main a{padding:11px 14px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- KEEP: fiction notice -->
+<div class="fiction" role="note">
+  <div class="wrap"><strong>Work of fiction.</strong> Calder Ford is an invented city. This site is not a real government and offers no real services.</div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="City of Calder Ford home">
+      <!-- Original seal: stone bridge, sun, river -->
+      <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="#1B3F5C"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#C9962B" stroke-width="2"/>
+        <circle cx="50" cy="50" r="34" fill="#DCE9F0"/>
+        <circle cx="50" cy="32" r="6" fill="#C9962B"/>
+        <rect x="22" y="46" width="56" height="5" fill="#1B3F5C"/>
+        <rect x="24" y="51" width="52" height="12" fill="#1B3F5C"/>
+        <path d="M28 63 a8 8 0 0 1 16 0 Z" fill="#DCE9F0"/>
+        <path d="M56 63 a8 8 0 0 1 16 0 Z" fill="#DCE9F0"/>
+        <path d="M24 70 q6.5 -5 13 0 t13 0 t13 0 t13 0" fill="none" stroke="#1B3F5C" stroke-width="3" stroke-linecap="round"/>
+        <path d="M32 77 q6 -4.5 12 0 t12 0 t12 0" fill="none" stroke="#C9962B" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <b>City of Calder Ford</b>
+        <span>Office of the Mayor &middot; Municipal Services</span>
+      </div>
+    </a>
+    <div class="util">
+      <a href="#">Translate</a>
+      <a href="#">Text size</a>
+      <a href="#">Sign in</a>
+      <a class="call" href="#">Call 555-0100</a>
+    </div>
+  </div>
+</header>
+
+<nav class="main" aria-label="Main">
+  <div class="wrap">
+    <ul>
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#mayor">Mayor</a></li>
+      <li><a href="#agencies">Departments</a></li>
+      <li><a href="#meetings">Meetings</a></li>
+      <li><a href="#report">Report a problem</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Alert banner: edit or delete -->
+<div class="alert" role="region" aria-label="City alert">
+  <div class="wrap">
+    <span class="tag">River advisory</span>
+    <p><strong>The Sable River is running 2 feet above normal.</strong> The Riverwalk is closed between 3rd and 7th Streets, and one lane of the Mill Street Bridge is shut for inspection. <a href="#">See details</a></p>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap grid">
+      <div>
+        <h1>City services for everyone who lives, works, or crosses the river in Calder Ford.</h1>
+        <p class="lede">Find a permit, report a problem, read a notice, or reach the office that handles it.</p>
+        <form class="finder" role="search" onsubmit="return false">
+          <label for="q">What do you need to do?</label>
+          <div class="row">
+            <input id="q" type="search" placeholder="For example: reserve a Riverwalk event space">
+            <button type="submit">Search</button>
+          </div>
+          <div class="chips" aria-label="Popular searches">
+            <a href="#">Business license</a>
+            <a href="#">Street sweeping</a>
+            <a href="#">Birth certificate</a>
+            <a href="#">River levels</a>
+            <a href="#">Public records</a>
+          </div>
+        </form>
+      </div>
+
+      <aside class="today" aria-label="Today in Calder Ford">
+        <h2>Today in Calder Ford</h2>
+        <dl>
+          <dt>River stage</dt><dd class="warn">11.2 ft, rising slowly</dd>
+          <dt>Flood stage</dt><dd>14.0 ft</dd>
+          <dt>Bridges</dt><dd class="warn">Mill St: one lane closed</dd>
+          <dt>Riverwalk</dt><dd class="warn">Closed, 3rd to 7th St</dd>
+          <dt>Street sweeping</dt><dd class="ok">In effect, west bank</dd>
+          <dt>City Hall</dt><dd>Open 8 a.m. to 5 p.m.</dd>
+        </dl>
+        <small>Updated 7:15 a.m. Edit these rows to match your story's timeline.</small>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="block alt" id="services">
+    <div class="wrap">
+      <div class="head"><h2>Most-used services</h2><a href="#">All services</a></div>
+      <div class="services">
+        <a class="svc" href="#"><h3>Permits &amp; licenses</h3><p>Building, business, event, and dock permits.</p></a>
+        <a class="svc" href="#"><h3>Housing &amp; property</h3><p>Records, inspections, rent board, and tax notices.</p></a>
+        <a class="svc" href="#"><h3>Streets &amp; bridges</h3><p>Parking, bridge status, bus routes, and road work.</p></a>
+        <a class="svc" href="#"><h3>Public safety</h3><p>Police, fire, river rescue, and emergency alerts.</p></a>
+        <a class="svc" href="#"><h3>Flood &amp; water</h3><p>River levels, sandbags, drainage, and drinking water.</p></a>
+        <a class="svc" href="#"><h3>Health &amp; family</h3><p>Clinics, vital records, food assistance, and senior care.</p></a>
+        <a class="svc" href="#"><h3>Parks &amp; riverfront</h3><p>Reservations, trails, boat ramps, and fishing access.</p></a>
+        <a class="svc" href="#"><h3>Records &amp; transparency</h3><p>Meeting minutes, budgets, and open data.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- News + Meetings -->
+  <section class="block" id="news">
+    <div class="wrap cols">
+      <div class="news">
+        <div class="head"><h2>News &amp; announcements</h2><a href="#">All news</a></div>
+        <article>
+          <time datetime="2026-11-24">November 24, 2026</time>
+          <h3><a href="#">Mayor announces review of riverfront contracts</a></h3>
+          <p>The Office of the Mayor will open its riverfront development agreements to an independent audit beginning in January.</p>
+        </article>
+        <article>
+          <time datetime="2026-11-21">November 21, 2026</time>
+          <h3><a href="#">Mill Street Bridge repairs enter second phase</a></h3>
+          <p>Crews will alternate lane closures through mid-December while engineers inspect the east abutment. Expect delays at rush hour.</p>
+        </article>
+        <article>
+          <time datetime="2026-11-18">November 18, 2026</time>
+          <h3><a href="#">Winter parking rules begin December 1</a></h3>
+          <p>Overnight restrictions return on the west bank. Residents with permits should confirm their zone before the first snowfall.</p>
+        </article>
+      </div>
+
+      <aside class="meetings" id="meetings" aria-label="Upcoming meetings">
+        <h2>Upcoming meetings</h2>
+        <ul>
+          <li><div class="date"><b>02</b><span>DEC</span></div><div><strong>City Council, regular session</strong><small>6:30 p.m. &middot; Council Chamber</small></div></li>
+          <li><div class="date"><b>04</b><span>DEC</span></div><div><strong>River Commission hearing</strong><small>10:00 a.m. &middot; Riverside Office</small></div></li>
+          <li><div class="date"><b>09</b><span>DEC</span></div><div><strong>Zoning Board of Appeals</strong><small>5:00 p.m. &middot; City Hall, Room 214</small></div></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Mayor -->
+  <section class="block alt" id="mayor">
+    <div class="wrap">
+      <div class="mayor">
+        <div class="portrait" aria-label="Placeholder portrait">M.V.</div>
+        <div>
+          <h2>From the Mayor's office</h2>
+          <blockquote>&ldquo;Calder Ford works when residents can see how decisions are made. Our doors, and our records, are open.&rdquo;</blockquote>
+          <p><cite>Mayor Marguerite Vance</cite> &middot; <a href="#">Read the full statement</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agencies -->
+  <section class="block" id="agencies">
+    <div class="wrap">
+      <div class="head"><h2>Departments &amp; offices</h2><a href="#">A to Z directory</a></div>
+      <ul class="agencies">
+        <li><a href="#">Office of the Mayor</a></li>
+        <li><a href="#">City Clerk</a></li>
+        <li><a href="#">Department of Buildings</a></li>
+        <li><a href="#">Department of Finance</a></li>
+        <li><a href="#">Department of Public Works</a></li>
+        <li><a href="#">Department of Health</a></li>
+        <li><a href="#">River Authority</a></li>
+        <li><a href="#">Flood Control District</a></li>
+        <li><a href="#">Calder Ford Police</a></li>
+        <li><a href="#">Fire &amp; Rescue</a></li>
+        <li><a href="#">Parks &amp; Recreation</a></li>
+        <li><a href="#">Housing &amp; Rent Board</a></li>
+        <li><a href="#">Office of Records</a></li>
+        <li><a href="#">Planning Commission</a></li>
+        <li><a href="#">Public Library System</a></li>
+        <li><a href="#">Inspector General</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Report -->
+  <section class="block alt" id="report">
+    <div class="wrap">
+      <div class="head"><h2>Report a problem</h2></div>
+      <div class="report">
+        <a href="#"><b>Streets &amp; sidewalks</b><span>Potholes, broken lights, blocked drains.</span></a>
+        <a href="#"><b>Noise &amp; nuisance</b><span>Construction, late-night, and riverfront noise.</span></a>
+        <a href="#"><b>River &amp; riverbank</b><span>Debris, spills, erosion, and flooded paths.</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h3>City of Calder Ford</h3>
+        <p>1 River Square<br>Calder Ford<br>Main line: 555-0100</p>
+      </div>
+      <div>
+        <h3>Government</h3>
+        <ul><li><a href="#">Mayor</a></li><li><a href="#">City Council</a></li><li><a href="#">Budget</a></li><li><a href="#">Open data</a></li></ul>
+      </div>
+      <div>
+        <h3>Residents</h3>
+        <ul><li><a href="#">Services</a></li><li><a href="#">Jobs</a></li><li><a href="#">Events</a></li><li><a href="#">Accessibility</a></li></ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul><li><a href="#">Contact us</a></li><li><a href="#">Press office</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <p class="fine"><strong>Fiction notice:</strong> The City of Calder Ford, the Sable River, its officials, seal, departments, and all events on this page are invented for storytelling. Any resemblance to real governments or people is coincidental.</p>
+  </div>
+</footer>
+</body>
+</html>
