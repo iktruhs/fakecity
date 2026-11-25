@@ -10,45 +10,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 
 <!--
-  ============================================================
-  TEMPLATE NOTES
-  - New Losanti is an invented city set on the real Ohio River.
-    Rename it by searching for "New Losanti" and replacing it
-    everywhere.
-  - Recolor the whole site from the :root variables below.
-    Current palette: black, red, white, and blue.
-  - One type family (Archivo) does everything. Headlines use its
-    wide, heavy setting; body text uses the regular setting.
-  - The hero artwork is inline SVG (class "art"). Each group with
-    class "par" drifts slightly as the pointer moves over it.
-  - The "fiction notice" bar and footer note are meant to stay.
-  - This page has no logins, payments, or data-collecting forms.
-  - LINKS: every link opens a 404 page (see the script at the
-    bottom of this file). The Home link, the logo, and the skip
-    link are the only exceptions. To point a link at a real page
-    later, add the attribute data-keep to it.
-  - The "Report a sighting" link carries data-report and opens a
-    fake vigilante report form. The form never sends or stores
-    anything; submitting it just shows a made-up reference number.
-  ============================================================
+  ============================================================
+  TEMPLATE NOTES
+  - New Losanti is an invented city set on the real Ohio River.
+    Rename it by searching for "New Losanti" and replacing it
+    everywhere.
+  - Recolor the whole site from the :root variables below.
+    Current palette: black, red, white, and blue.
+  - One type family (Archivo) does everything. Headlines use its
+    wide, heavy setting; body text uses the regular setting.
+  - The hero artwork is inline SVG (class "art"). Each group with
+    class "par" drifts slightly as the pointer moves over it.
+  - The "fiction notice" bar and footer note are meant to stay.
+  - This page has no logins, payments, or data-collecting forms.
+  - LINKS: every link opens a 404 page (see the script at the
+    bottom of this file). The Home link, the logo, and the skip
+    link are the only exceptions. To point a link at a real page
+    later, add the attribute data-keep to it.
+  ============================================================
 -->
 
 <style>
 :root{
-  --river:       #1A3FA8;   /* primary: royal blue */
-  --river-ink:   #0A0A0A;   /* black: headings, nav, footer */
-  --sky:         #4C7DFF;   /* bright blue for graphics on black */
-  --mist:        #E9EEF9;   /* light blue-white surface */
-  --pale:        #F1F4FC;
-  --foam:        #FFFFFF;   /* page background */
-  --flood:       #D1202F;   /* red: alerts, key shapes */
-  --brass:       #F0485A;   /* bright red: focus, accents on dark */
-  --ink:         #12141A;   /* body text */
-  --muted:       #4A5163;
-  --line:        #CBD2E3;
-  --white:       #FFFFFF;
-  --wrap:        1240px;
-  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --river:       #1A3FA8;   /* primary: royal blue */
+  --river-ink:   #0A0A0A;   /* black: headings, nav, footer */
+  --sky:         #4C7DFF;   /* bright blue for graphics on black */
+  --mist:        #E9EEF9;   /* light blue-white surface */
+  --pale:        #F1F4FC;
+  --foam:        #FFFFFF;   /* page background */
+  --flood:       #D1202F;   /* red: alerts, key shapes */
+  --brass:       #F0485A;   /* bright red: focus, accents on dark */
+  --ink:         #12141A;   /* body text */
+  --muted:       #4A5163;
+  --line:        #CBD2E3;
+  --white:       #FFFFFF;
+  --wrap:        1240px;
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
 }
 *{box-sizing:border-box}
 [hidden]{display:none !important}
@@ -104,12 +101,11 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--brass
 /* Hero */
 .hero{padding:72px 0 84px}
 .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-.hero .grid > *{min-width:0}
 .hero p.lede{font-size:1.15rem;color:var(--muted)}
 .finder{margin-top:28px}
 .finder label{display:block;font-weight:700;margin-bottom:8px}
 .finder .row{display:flex;max-width:580px}
-.finder input{flex:1;width:100%;font:inherit;padding:15px 16px;border:3px solid var(--river-ink);border-right:0;background:var(--white);min-width:0;border-radius:0}
+.finder input{flex:1;font:inherit;padding:15px 16px;border:3px solid var(--river-ink);border-right:0;background:var(--white);min-width:0;border-radius:0}
 .finder button{font:inherit;font-weight:700;padding:0 26px;background:var(--river);color:var(--white);border:3px solid var(--river-ink);cursor:pointer;border-radius:0}
 .finder button:hover{background:var(--flood)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:.92rem}
@@ -121,8 +117,8 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--brass
 .art{display:block;width:100%;height:100%}
 .par{transition:transform .35s ease-out}
 @media (prefers-reduced-motion:no-preference){
-  .in{animation:slide .95s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--dl,0s)}
-  @keyframes slide{from{opacity:0;transform:translate(var(--fx,0),var(--fy,0))}to{opacity:1;transform:none}}
+  .in{animation:slide .95s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--dl,0s)}
+  @keyframes slide{from{opacity:0;transform:translate(var(--fx,0),var(--fy,0))}to{opacity:1;transform:none}}
 }
 
 /* Today band with river gauge */
@@ -134,7 +130,7 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--brass
 .gauge-label span{color:#AFC2F0;font-weight:500}
 .gauge-label strong{font-stretch:110%;font-weight:800;font-size:1.5rem;color:#FFB3B9}
 .gauge{position:relative;height:40px;background:#1E2230;
-  background-image:repeating-linear-gradient(to right,rgba(255,255,255,.28) 0 2px,transparent 2px calc(100% / 7))}
+  background-image:repeating-linear-gradient(to right,rgba(255,255,255,.28) 0 2px,transparent 2px calc(100% / 7))}
 .gauge i{position:absolute;left:0;top:0;bottom:0;width:80%;background:var(--sky);opacity:.95}
 .gauge i::after{content:"";position:absolute;right:0;top:-8px;bottom:-8px;width:4px;background:var(--white)}
 .gauge em{position:absolute;right:0;top:-8px;bottom:-8px;width:8px;background:var(--flood)}
@@ -220,56 +216,6 @@ section.block.alt{background:var(--mist)}
 .report .shape{position:absolute;right:-8%;bottom:-12%;width:66%;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .report a:hover .shape{transform:rotate(14deg) scale(1.06)}
 
-/* Report view (fake vigilante report form) */
-.rp{padding:64px 0 96px}
-.rp h1{font-size:clamp(2rem,4.4vw,3.4rem);margin-bottom:.35em}
-.rp h1:focus,.rp h2:focus{outline:none}
-.rp .rule{width:160px;height:14px;background:var(--flood);margin:0 0 26px}
-.rp .lede{font-size:1.15rem;color:var(--muted);max-width:60ch;margin-bottom:44px}
-.rp-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start}
-.rp-fiction{background:var(--mist);border-left:8px solid var(--river);padding:12px 16px;font-size:.92rem;margin:0 0 32px;max-width:none}
-.rp-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.rp-field{margin:0 0 26px}
-.rp-field > label,.rp fieldset legend{display:block;font-weight:700;margin-bottom:8px;padding:0}
-.rp fieldset{border:0;margin:0 0 26px;padding:0;min-width:0}
-.rp input[type=date],.rp input[type=time],.rp input[type=text],.rp select,.rp textarea{width:100%;font:inherit;padding:13px 14px;border:3px solid var(--river-ink);background:var(--white);color:var(--ink);border-radius:0}
-.rp textarea{min-height:150px;resize:vertical}
-.rp .hint{display:block;font-size:.88rem;color:var(--muted);margin-top:6px}
-.rp-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
-.rp-opts.inline{display:flex;flex-wrap:wrap;gap:10px 26px}
-.rp-opts label{display:flex;gap:10px;align-items:flex-start;font-weight:500;cursor:pointer}
-.rp-opts input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--river);flex:none}
-.rp-btn{display:inline-block;background:var(--river);color:var(--white);padding:15px 30px;border:3px solid var(--river-ink);font:inherit;font-weight:700;cursor:pointer;border-radius:0}
-.rp-btn:hover{background:var(--flood)}
-.rp-side{position:relative;overflow:hidden;background:var(--river-ink);color:var(--white);padding:32px}
-.rp-side::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:var(--flood)}
-.rp-side > *{position:relative}
-.rp-side h2{color:var(--white);font-size:1.5rem;margin-bottom:16px}
-.rp-side ul{margin:0;padding-left:1.1em}
-.rp-side li{margin:0 0 12px}
-.rp-done{border:6px solid var(--river-ink);background:var(--pale);padding:34px}
-.rp-done h2{font-size:clamp(1.6rem,3vw,2.3rem)}
-.rp-refno{display:inline-block;background:var(--river-ink);color:var(--white);padding:4px 12px;font-stretch:110%;font-weight:800;letter-spacing:.04em}
-.rp-done dl{margin:22px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px}
-.rp-done dt{font-weight:700}
-.rp-done dd{margin:0;word-break:break-word}
-@media (max-width:900px){.rp-grid{grid-template-columns:1fr}}
-@media (max-width:560px){.rp{padding:44px 0 64px}.rp-row,.rp-opts{grid-template-columns:1fr}}
-
-/* Vigilante directory */
-.vd{padding:64px 0 96px}
-.vd h1{font-size:clamp(2rem,4.4vw,3.4rem);margin-bottom:.35em}
-.vd .lede{font-size:1.15rem;color:var(--muted);max-width:60ch;margin-bottom:30px}
-.vd-notice{background:#FFF0F1;border-left:8px solid var(--flood);padding:14px 18px;margin:0 0 32px;max-width:850px}
-.vd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:var(--river-ink);border:6px solid var(--river-ink)}
-.vd-card{background:var(--mist);padding:24px;min-height:190px}
-.vd-card:nth-child(2n){background:var(--white)}
-.vd-card .status{display:inline-block;background:var(--river-ink);color:white;padding:4px 9px;font-size:.78rem;font-weight:700;margin-bottom:12px}
-.vd-card h2{font-size:1.45rem;margin:0 0 8px}
-.vd-card p{margin:0;color:var(--muted)}
-.vd-back{display:inline-block;margin-top:28px;font-weight:700}
-@media(max-width:560px){.vd{padding:44px 0 64px}.vd-grid{grid-template-columns:1fr}}
-
 /* 404 view */
 .nf{padding:72px 0 96px}
 .nf .code{position:relative;z-index:0;display:inline-block;margin:0 0 26px;font-stretch:125%;font-weight:900;font-size:clamp(6.5rem,26vw,17rem);line-height:.82;letter-spacing:-.05em;color:var(--river-ink)}
@@ -296,27 +242,27 @@ footer .fine{border-top:1px solid rgba(255,255,255,.2);margin-top:30px;padding-t
 footer .fine strong{color:var(--brass)}
 
 @media (max-width:900px){
-  .hero .grid,.cols,.mayor{grid-template-columns:1fr}
-  .hero{padding:48px 0 64px}
-  .art-wrap{max-width:520px;box-shadow:12px 12px 0 var(--flood)}
-  .mosaic{grid-template-columns:repeat(2,1fr)}
-  .s3,.s4,.s5,.s7{grid-column:span 1}
-  .report{grid-template-columns:1fr}
-  .agencies{columns:2}
-  .today dl{grid-template-columns:repeat(2,1fr);row-gap:22px}
-  .today dl div:nth-child(3){padding-left:0;border-left:0}
-  footer .grid{grid-template-columns:1fr 1fr}
-  .mayor .portrait-wrap{max-width:200px}
+  .hero .grid,.cols,.mayor{grid-template-columns:1fr}
+  .hero{padding:48px 0 64px}
+  .art-wrap{max-width:520px;box-shadow:12px 12px 0 var(--flood)}
+  .mosaic{grid-template-columns:repeat(2,1fr)}
+  .s3,.s4,.s5,.s7{grid-column:span 1}
+  .report{grid-template-columns:1fr}
+  .agencies{columns:2}
+  .today dl{grid-template-columns:repeat(2,1fr);row-gap:22px}
+  .today dl div:nth-child(3){padding-left:0;border-left:0}
+  footer .grid{grid-template-columns:1fr 1fr}
+  .mayor .portrait-wrap{max-width:200px}
 }
 @media (max-width:560px){
-  body{font-size:16px}
-  .mosaic{grid-template-columns:1fr}
-  .agencies{columns:1}
-  .news .item{grid-template-columns:84px 1fr;gap:16px}
-  .news time b{font-size:2.2rem}
-  footer .grid{grid-template-columns:1fr}
-  nav.main a{padding:12px 14px}
-  .nf{padding:48px 0 64px}
+  body{font-size:16px}
+  .mosaic{grid-template-columns:1fr}
+  .agencies{columns:1}
+  .news .item{grid-template-columns:84px 1fr;gap:16px}
+  .news time b{font-size:2.2rem}
+  footer .grid{grid-template-columns:1fr}
+  nav.main a{padding:12px 14px}
+  .nf{padding:48px 0 64px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.par,.svc svg,.report .shape,.agencies a{transition:none}}
 </style>
@@ -327,66 +273,66 @@ footer .fine strong{color:var(--brass)}
 
 <!-- KEEP: fiction notice -->
 <div class="fiction" role="note">
-  <div class="wrap"><strong>Work of fiction.</strong> New Losanti is an invented city. This site is not a real government and offers no real services.</div>
+  <div class="wrap"><strong>Work of fiction.</strong> New Losanti is an invented city. This site is not a real government and offers no real services.</div>
 </div>
 
 <header class="masthead">
-  <div class="wrap">
-    <a class="brand" href="#" data-home aria-label="City of New Losanti home">
-      <!-- Original seal: stone bridge, sun, river -->
-      <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
-        <circle cx="50" cy="50" r="48" fill="#0A0A0A"/>
-        <circle cx="50" cy="50" r="43" fill="none" stroke="#F0485A" stroke-width="2"/>
-        <circle cx="50" cy="50" r="34" fill="#F1F4FC"/>
-        <circle cx="50" cy="32" r="6" fill="#F0485A"/>
-        <rect x="22" y="46" width="56" height="5" fill="#1A3FA8"/>
-        <rect x="24" y="51" width="52" height="12" fill="#1A3FA8"/>
-        <path d="M28 63 a8 8 0 0 1 16 0 Z" fill="#F1F4FC"/>
-        <path d="M56 63 a8 8 0 0 1 16 0 Z" fill="#F1F4FC"/>
-        <path d="M24 70 q6.5 -5 13 0 t13 0 t13 0 t13 0" fill="none" stroke="#1A3FA8" stroke-width="3" stroke-linecap="round"/>
-        <path d="M32 77 q6 -4.5 12 0 t12 0 t12 0" fill="none" stroke="#F0485A" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-      <div>
-        <b>City of New Losanti</b>
-        <span>Office of the Mayor &middot; Municipal Services</span>
-      </div>
-    </a>
-    <div class="util">
-      <a href="#">Translate</a>
-      <a href="#">Text size</a>
-      <a href="#">Sign in</a>
-      <a class="call" href="#">Call 409-7403</a>
-    </div>
-  </div>
+  <div class="wrap">
+    <a class="brand" href="#" data-home aria-label="City of New Losanti home">
+      <!-- Original seal: stone bridge, sun, river -->
+      <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="#0A0A0A"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="#F0485A" stroke-width="2"/>
+        <circle cx="50" cy="50" r="34" fill="#F1F4FC"/>
+        <circle cx="50" cy="32" r="6" fill="#F0485A"/>
+        <rect x="22" y="46" width="56" height="5" fill="#1A3FA8"/>
+        <rect x="24" y="51" width="52" height="12" fill="#1A3FA8"/>
+        <path d="M28 63 a8 8 0 0 1 16 0 Z" fill="#F1F4FC"/>
+        <path d="M56 63 a8 8 0 0 1 16 0 Z" fill="#F1F4FC"/>
+        <path d="M24 70 q6.5 -5 13 0 t13 0 t13 0 t13 0" fill="none" stroke="#1A3FA8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M32 77 q6 -4.5 12 0 t12 0 t12 0" fill="none" stroke="#F0485A" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <b>City of New Losanti</b>
+        <span>Office of the Mayor &middot; Municipal Services</span>
+      </div>
+    </a>
+    <div class="util">
+      <a href="#">Translate</a>
+      <a href="#">Text size</a>
+      <a href="#">Sign in</a>
+      <a class="call" href="#">Call 409-7403</a>
+    </div>
+  </div>
 </header>
 
 <nav class="main" aria-label="Main">
-  <div class="wrap">
-    <ul>
-      <li><a href="#" data-home aria-current="page">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#mayor">Mayor</a></li>
-      <li><a href="#agencies">Departments</a></li>
-      <li><a href="#meetings">Meetings</a></li>
-      <li><a href="#report">Report a problem</a></li>
-    </ul>
-  </div>
+  <div class="wrap">
+    <ul>
+      <li><a href="#" data-home aria-current="page">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#mayor">Mayor</a></li>
+      <li><a href="#agencies">Departments</a></li>
+      <li><a href="#meetings">Meetings</a></li>
+      <li><a href="#report">Report a problem</a></li>
+    </ul>
+  </div>
 </nav>
 
 <!-- Alert banner: edit or delete -->
 <div class="alert" id="alert" role="region" aria-label="City alert">
-  <div class="wrap">
-    <span class="tag">River advisory</span>
-    <p><strong>The Ohio River is running 2 feet above normal.</strong> The Riverwalk is closed between 3rd and 7th Streets, and one lane of the John A. Roebling Suspension Bridge is shut for inspection. <a href="#">See details</a></p>
-  </div>
-  <!-- Notice bar: edit or delete -->
-  <div class="notice">
-    <div class="wrap">
-      <span class="tag">Public safety notice</span>
-      <p><strong>A masked vigilante has been reported on city streets after dark.</strong> Residents describe a figure in a bat-style mask. Do not approach or confront this person. The city does not authorize vigilante activity. <a href="#" data-report>Report a sighting</a></p>
-    </div>
-  </div>
+  <div class="wrap">
+    <span class="tag">River advisory</span>
+    <p><strong>The Ohio River is running 2 feet above normal.</strong> The Riverwalk is closed between 3rd and 7th Streets, and one lane of the John A. Roebling Suspension Bridge is shut for inspection. <a href="#">See details</a></p>
+  </div>
+  <!-- Notice bar: edit or delete -->
+  <div class="notice">
+    <div class="wrap">
+      <span class="tag">Public safety notice</span>
+      <p><strong>A masked vigilante has been reported on city streets after dark.</strong> Residents describe a figure in a bat-style mask. Do not approach or confront this person. The city does not authorize vigilante activity. <a href="#">Report a sighting</a></p>
+    </div>
+  </div>
 </div>
 
 <main id="main">
@@ -394,557 +340,384 @@ footer .fine strong{color:var(--brass)}
 <!-- ===== HOME VIEW ===== -->
 <div id="home-view">
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="wrap grid">
-      <div>
-        <h1>City services for everyone who lives, works, or crosses the river in New Losanti.</h1>
-        <p class="lede">Find a permit, report a problem, read a notice, or reach the office that handles it.</p>
-        <form class="finder" role="search" onsubmit="return false">
-          <label for="q">What do you need to do?</label>
-          <div class="row">
-            <input id="q" type="search" placeholder="For example: reserve a Riverwalk event space">
-            <button type="submit">Search</button>
-          </div>
-          <div class="chips" aria-label="Popular searches">
-            <a href="#">Business license</a>
-            <a href="#">Street sweeping</a>
-            <a href="#">Birth certificate</a>
-            <a href="#">River levels</a>
-            <a href="#">Public records</a>
-          </div>
-        </form>
-      </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap grid">
+      <div>
+        <h1>City services for everyone who lives, works, or crosses the river in New Losanti.</h1>
+        <p class="lede">Find a permit, report a problem, read a notice, or reach the office that handles it.</p>
+        <form class="finder" role="search" onsubmit="return false">
+          <label for="q">What do you need to do?</label>
+          <div class="row">
+            <input id="q" type="search" placeholder="For example: reserve a Riverwalk event space">
+            <button type="submit">Search</button>
+          </div>
+          <div class="chips" aria-label="Popular searches">
+            <a href="#">Business license</a>
+            <a href="#">Street sweeping</a>
+            <a href="#">Birth certificate</a>
+            <a href="#">River levels</a>
+            <a href="#">Public records</a>
+          </div>
+        </form>
+      </div>
 
-      <!-- Abstract artwork: a suspension bridge, a red sun, blue water -->
-      <div class="art-wrap">
-        <svg class="art" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Abstract artwork of a suspension bridge crossing blue water beneath a red sun">
-          <rect width="600" height="600" fill="#E9EEF9"/>
+      <!-- Abstract artwork: a suspension bridge, a red sun, blue water -->
+      <div class="art-wrap">
+        <svg class="art" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Abstract artwork of a suspension bridge crossing blue water beneath a red sun">
+          <rect width="600" height="600" fill="#E9EEF9"/>
 
-          <g class="in" style="--fx:-70px;--fy:-70px;--dl:0s"><g class="par" data-x="8" data-y="8">
-            <polygon points="0,0 310,0 0,310" fill="#1A3FA8"/>
-            <circle cx="92" cy="92" r="24" fill="#FFFFFF"/>
-          </g></g>
+          <g class="in" style="--fx:-70px;--fy:-70px;--dl:0s"><g class="par" data-x="8" data-y="8">
+            <polygon points="0,0 310,0 0,310" fill="#1A3FA8"/>
+            <circle cx="92" cy="92" r="24" fill="#FFFFFF"/>
+          </g></g>
 
-          <g class="in" style="--fx:0px;--fy:-60px;--dl:.12s"><g class="par" data-x="-16" data-y="-12">
-            <circle cx="410" cy="196" r="124" fill="#D1202F"/>
-          </g></g>
+          <g class="in" style="--fx:0px;--fy:-60px;--dl:.12s"><g class="par" data-x="-16" data-y="-12">
+            <circle cx="410" cy="196" r="124" fill="#D1202F"/>
+          </g></g>
 
-          <g class="in" style="--fx:0px;--fy:80px;--dl:.24s"><g class="par" data-x="-6" data-y="0">
-            <rect x="-20" y="372" width="660" height="240" fill="#1A3FA8"/>
-            <path d="M-20 452H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="64 26"/>
-            <path d="M-20 492H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="34 22" stroke-dashoffset="30"/>
-            <path d="M-20 532H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="84 30" stroke-dashoffset="12"/>
-            <path d="M-20 572H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="44 26" stroke-dashoffset="52"/>
-          </g></g>
+          <g class="in" style="--fx:0px;--fy:80px;--dl:.24s"><g class="par" data-x="-6" data-y="0">
+            <rect x="-20" y="372" width="660" height="240" fill="#1A3FA8"/>
+            <path d="M-20 452H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="64 26"/>
+            <path d="M-20 492H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="34 22" stroke-dashoffset="30"/>
+            <path d="M-20 532H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="84 30" stroke-dashoffset="12"/>
+            <path d="M-20 572H640" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="44 26" stroke-dashoffset="52"/>
+          </g></g>
 
-          <g class="in" style="--fx:90px;--fy:0px;--dl:.36s"><g class="par" data-x="12" data-y="5">
-            <rect x="-10" y="330" width="620" height="22" fill="#0A0A0A"/>
-            <rect x="-10" y="352" width="620" height="60" fill="#0A0A0A"/>
-            <path d="M44 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
-            <path d="M164 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
-            <path d="M284 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
-            <path d="M404 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
-            <path d="M524 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
-            <rect x="440" y="72" width="24" height="258" fill="#0A0A0A"/>
-            <circle cx="452" cy="60" r="11" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="4"/>
-            <g stroke="#0A0A0A" stroke-width="2.5">
-              <line x1="452" y1="84" x2="372" y2="330"/>
-              <line x1="452" y1="84" x2="300" y2="330"/>
-              <line x1="452" y1="84" x2="228" y2="330"/>
-              <line x1="452" y1="84" x2="156" y2="330"/>
-              <line x1="452" y1="84" x2="84" y2="330"/>
-              <line x1="452" y1="84" x2="530" y2="330"/>
-              <line x1="452" y1="84" x2="590" y2="330"/>
-            </g>
-            <rect x="38" y="214" width="14" height="116" fill="#D1202F"/>
-          </g></g>
-        </svg>
-      </div>
-    </div>
-  </section>
+          <g class="in" style="--fx:90px;--fy:0px;--dl:.36s"><g class="par" data-x="12" data-y="5">
+            <rect x="-10" y="330" width="620" height="22" fill="#0A0A0A"/>
+            <rect x="-10" y="352" width="620" height="60" fill="#0A0A0A"/>
+            <path d="M44 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
+            <path d="M164 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
+            <path d="M284 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
+            <path d="M404 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
+            <path d="M524 412 a40 40 0 0 1 80 0 Z" fill="#1A3FA8"/>
+            <rect x="440" y="72" width="24" height="258" fill="#0A0A0A"/>
+            <circle cx="452" cy="60" r="11" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="4"/>
+            <g stroke="#0A0A0A" stroke-width="2.5">
+              <line x1="452" y1="84" x2="372" y2="330"/>
+              <line x1="452" y1="84" x2="300" y2="330"/>
+              <line x1="452" y1="84" x2="228" y2="330"/>
+              <line x1="452" y1="84" x2="156" y2="330"/>
+              <line x1="452" y1="84" x2="84" y2="330"/>
+              <line x1="452" y1="84" x2="530" y2="330"/>
+              <line x1="452" y1="84" x2="590" y2="330"/>
+            </g>
+            <rect x="38" y="214" width="14" height="116" fill="#D1202F"/>
+          </g></g>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-  <!-- Today band: river gauge -->
-  <section class="today" aria-label="Today in New Losanti">
-    <div class="wrap">
-      <div class="today-head">
-        <h2>Today in New Losanti</h2>
-        <small>Updated 7:15 a.m. Edit these rows to match your story's timeline.</small>
-      </div>
+  <!-- Today band: river gauge -->
+  <section class="today" aria-label="Today in New Losanti">
+    <div class="wrap">
+      <div class="today-head">
+        <h2>Today in New Losanti</h2>
+        <small>Updated 7:15 a.m. Edit these rows to match your story's timeline.</small>
+      </div>
 
-      <div class="gauge-label"><span>River stage</span><strong>11.2 ft, rising slowly</strong></div>
-      <div class="gauge" role="img" aria-label="River stage is 11.2 feet. Flood stage is 14.0 feet."><i></i><em></em></div>
-      <div class="gauge-scale"><span>0 ft</span><span>Flood stage 14.0 ft</span></div>
+      <div class="gauge-label"><span>River stage</span><strong>11.2 ft, rising slowly</strong></div>
+      <div class="gauge" role="img" aria-label="River stage is 11.2 feet. Flood stage is 14.0 feet."><i></i><em></em></div>
+      <div class="gauge-scale"><span>0 ft</span><span>Flood stage 14.0 ft</span></div>
 
-      <dl>
-        <div><dt>Bridges</dt><dd class="warn">Mill St: one lane closed</dd></div>
-        <div><dt>Riverwalk</dt><dd class="warn">Closed, 3rd to 7th St</dd></div>
-        <div><dt>Street sweeping</dt><dd class="ok">In effect, west bank</dd></div>
-        <div><dt>City Hall</dt><dd>Open 8 a.m. to 5 p.m.</dd></div>
-      </dl>
-    </div>
-  </section>
+      <dl>
+        <div><dt>Bridges</dt><dd class="warn">Mill St: one lane closed</dd></div>
+        <div><dt>Riverwalk</dt><dd class="warn">Closed, 3rd to 7th St</dd></div>
+        <div><dt>Street sweeping</dt><dd class="ok">In effect, west bank</dd></div>
+        <div><dt>City Hall</dt><dd>Open 8 a.m. to 5 p.m.</dd></div>
+      </dl>
+    </div>
+  </section>
 
-  <!-- Services: mosaic -->
-  <section class="block" id="services">
-    <div class="wrap">
-      <div class="head"><h2>Most-used services</h2><a href="#">All services</a></div>
-      <div class="mosaic">
+  <!-- Services: mosaic -->
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head"><h2>Most-used services</h2><a href="#">All services</a></div>
+      <div class="mosaic">
 
-        <a class="svc s5 t-blue" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="40" cy="40" r="12" fill="var(--acc)"/><path d="M8 8 L56 56" stroke="currentColor" stroke-width="3"/></svg>
-          <h3>Permits &amp; licenses</h3><p>Building, business, event, and dock permits.</p>
-        </a>
+        <a class="svc s5 t-blue" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="48" height="48" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="40" cy="40" r="12" fill="var(--acc)"/><path d="M8 8 L56 56" stroke="currentColor" stroke-width="3"/></svg>
+          <h3>Permits &amp; licenses</h3><p>Building, business, event, and dock permits.</p>
+        </a>
 
-        <a class="svc s3 t-white" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 L32 8 L56 30 Z" fill="var(--acc)"/><rect x="14" y="30" width="36" height="26" fill="currentColor"/></svg>
-          <h3>Housing &amp; property</h3><p>Records, inspections, rent board, and tax notices.</p>
-        </a>
+        <a class="svc s3 t-white" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 L32 8 L56 30 Z" fill="var(--acc)"/><rect x="14" y="30" width="36" height="26" fill="currentColor"/></svg>
+          <h3>Housing &amp; property</h3><p>Records, inspections, rent board, and tax notices.</p>
+        </a>
 
-        <a class="svc s4 t-black" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="22" width="56" height="8" fill="currentColor"/><path d="M6 56 a13 13 0 0 1 26 0 Z" fill="var(--acc)"/><path d="M32 56 a13 13 0 0 1 26 0 Z" fill="currentColor"/></svg>
-          <h3>Streets &amp; bridges</h3><p>Parking, bridge status, bus routes, and road work.</p>
-        </a>
+        <a class="svc s4 t-black" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="22" width="56" height="8" fill="currentColor"/><path d="M6 56 a13 13 0 0 1 26 0 Z" fill="var(--acc)"/><path d="M32 56 a13 13 0 0 1 26 0 Z" fill="currentColor"/></svg>
+          <h3>Streets &amp; bridges</h3><p>Parking, bridge status, bus routes, and road work.</p>
+        </a>
 
-        <a class="svc s3 t-red" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="32" r="10" fill="var(--acc)"/><rect x="30" y="2" width="4" height="14" fill="currentColor"/></svg>
-          <h3>Public safety</h3><p>Police, fire, river rescue, and emergency alerts.</p>
-        </a>
+        <a class="svc s3 t-red" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="32" r="10" fill="var(--acc)"/><rect x="30" y="2" width="4" height="14" fill="currentColor"/></svg>
+          <h3>Public safety</h3><p>Police, fire, river rescue, and emergency alerts.</p>
+        </a>
 
-        <a class="svc s5 t-pale" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M4 24 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="currentColor" stroke-width="4"/><path d="M4 38 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="var(--acc)" stroke-width="4"/><path d="M4 52 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="currentColor" stroke-width="4"/></svg>
-          <h3>Flood &amp; water</h3><p>River levels, sandbags, drainage, and drinking water.</p>
-        </a>
+        <a class="svc s5 t-pale" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M4 24 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="currentColor" stroke-width="4"/><path d="M4 38 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="var(--acc)" stroke-width="4"/><path d="M4 52 q7 -9 14 0 t14 0 t14 0 t14 0" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+          <h3>Flood &amp; water</h3><p>River levels, sandbags, drainage, and drinking water.</p>
+        </a>
 
-        <a class="svc s4 t-blue" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="var(--acc)"/><rect x="27" y="14" width="10" height="36" fill="#0A0A0A"/><rect x="14" y="27" width="36" height="10" fill="#0A0A0A"/></svg>
-          <h3>Health &amp; family</h3><p>Clinics, vital records, food assistance, and senior care.</p>
-        </a>
+        <a class="svc s4 t-blue" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="var(--acc)"/><rect x="27" y="14" width="10" height="36" fill="#0A0A0A"/><rect x="14" y="27" width="36" height="10" fill="#0A0A0A"/></svg>
+          <h3>Health &amp; family</h3><p>Clinics, vital records, food assistance, and senior care.</p>
+        </a>
 
-        <a class="svc s7 t-white" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="22" cy="22" r="14" fill="var(--acc)"/><path d="M4 58 L34 20 L60 58 Z" fill="currentColor"/></svg>
-          <h3>Parks &amp; riverfront</h3><p>Reservations, trails, boat ramps, and fishing access.</p>
-        </a>
+        <a class="svc s7 t-white" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="22" cy="22" r="14" fill="var(--acc)"/><path d="M4 58 L34 20 L60 58 Z" fill="currentColor"/></svg>
+          <h3>Parks &amp; riverfront</h3><p>Reservations, trails, boat ramps, and fishing access.</p>
+        </a>
 
-        <a class="svc s5 t-black" href="#">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="6" width="52" height="8" fill="currentColor"/><rect x="6" y="20" width="38" height="8" fill="#BFD1FF"/><rect x="6" y="34" width="52" height="8" fill="currentColor"/><rect x="6" y="48" width="26" height="8" fill="#BFD1FF"/></svg>
-          <h3>Records &amp; transparency</h3><p>Meeting minutes, budgets, and open data.</p>
-        </a>
+        <a class="svc s5 t-black" href="#">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="6" width="52" height="8" fill="currentColor"/><rect x="6" y="20" width="38" height="8" fill="#BFD1FF"/><rect x="6" y="34" width="52" height="8" fill="currentColor"/><rect x="6" y="48" width="26" height="8" fill="#BFD1FF"/></svg>
+          <h3>Records &amp; transparency</h3><p>Meeting minutes, budgets, and open data.</p>
+        </a>
 
-      </div>
-    </div>
-  </section>
+      </div>
+    </div>
+  </section>
 
-  <!-- News + Meetings -->
-  <section class="block alt" id="news">
-    <div class="wrap cols">
-      <div class="news">
-        <div class="head"><h2>News &amp; announcements</h2><a href="#">All news</a></div>
-        <div class="item">
-          <time datetime="2026-11-24"><b>24</b><span>Nov 2026</span></time>
-          <div>
-            <h3><a href="#">Mayor announces review of riverfront contracts</a></h3>
-            <p>The Office of the Mayor will open its riverfront development agreements to an independent audit beginning in January.</p>
-          </div>
-        </div>
-        <div class="item">
-          <time datetime="2026-11-21"><b>21</b><span>Nov 2026</span></time>
-          <div>
-            <h3><a href="#">John A. Roebling Suspension Bridge repairs enter second phase</a></h3>
-            <p>Crews will alternate lane closures through mid-December while engineers inspect the east abutment. Expect delays at rush hour.</p>
-          </div>
-        </div>
-        <div class="item">
-          <time datetime="2026-11-18"><b>18</b><span>Nov 2026</span></time>
-          <div>
-            <h3><a href="#">Winter parking rules begin December 1</a></h3>
-            <p>Overnight restrictions return on the west bank. Residents with permits should confirm their zone before the first snowfall.</p>
-          </div>
-        </div>
-      </div>
+  <!-- News + Meetings -->
+  <section class="block alt" id="news">
+    <div class="wrap cols">
+      <div class="news">
+        <div class="head"><h2>News &amp; announcements</h2><a href="#">All news</a></div>
+        <div class="item">
+          <time datetime="2026-11-24"><b>24</b><span>Nov 2026</span></time>
+          <div>
+            <h3><a href="#">Mayor announces review of riverfront contracts</a></h3>
+            <p>The Office of the Mayor will open its riverfront development agreements to an independent audit beginning in January.</p>
+          </div>
+        </div>
+        <div class="item">
+          <time datetime="2026-11-21"><b>21</b><span>Nov 2026</span></time>
+          <div>
+            <h3><a href="#">John A. Roebling Suspension Bridge repairs enter second phase</a></h3>
+            <p>Crews will alternate lane closures through mid-December while engineers inspect the east abutment. Expect delays at rush hour.</p>
+          </div>
+        </div>
+        <div class="item">
+          <time datetime="2026-11-18"><b>18</b><span>Nov 2026</span></time>
+          <div>
+            <h3><a href="#">Winter parking rules begin December 1</a></h3>
+            <p>Overnight restrictions return on the west bank. Residents with permits should confirm their zone before the first snowfall.</p>
+          </div>
+        </div>
+      </div>
 
-      <aside class="meetings" id="meetings" aria-label="Upcoming meetings">
-        <h2>Upcoming meetings</h2>
-        <ul>
-          <li><div class="date"><b>02</b><span>Dec</span></div><div><strong>City Council, regular session</strong><small>6:30 p.m. &middot; Council Chamber</small></div></li>
-          <li><div class="date"><b>04</b><span>Dec</span></div><div><strong>River Commission hearing</strong><small>10:00 a.m. &middot; Riverside Office</small></div></li>
-          <li><div class="date"><b>09</b><span>Dec</span></div><div><strong>Zoning Board of Appeals</strong><small>5:00 p.m. &middot; City Hall, Room 214</small></div></li>
-        </ul>
-      </aside>
-    </div>
-  </section>
+      <aside class="meetings" id="meetings" aria-label="Upcoming meetings">
+        <h2>Upcoming meetings</h2>
+        <ul>
+          <li><div class="date"><b>02</b><span>Dec</span></div><div><strong>City Council, regular session</strong><small>6:30 p.m. &middot; Council Chamber</small></div></li>
+          <li><div class="date"><b>04</b><span>Dec</span></div><div><strong>River Commission hearing</strong><small>10:00 a.m. &middot; Riverside Office</small></div></li>
+          <li><div class="date"><b>09</b><span>Dec</span></div><div><strong>Zoning Board of Appeals</strong><small>5:00 p.m. &middot; City Hall, Room 214</small></div></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
 
-  <!-- Mayor -->
-  <section class="block" id="mayor">
-    <div class="wrap">
-      <div class="mayor">
-        <div class="portrait-wrap">
-          <!-- Abstract placeholder portrait: swap for your own artwork -->
-          <svg class="portrait" viewBox="0 0 200 250" role="img" aria-label="Abstract placeholder portrait">
-            <rect width="200" height="250" fill="#0A0A0A"/>
-            <circle cx="148" cy="52" r="30" fill="#1A3FA8"/>
-            <path d="M16 250 a84 84 0 0 1 168 0 Z" fill="#D1202F"/>
-            <polygon points="68,250 100,196 132,250" fill="#F1F4FC"/>
-            <circle cx="100" cy="106" r="46" fill="#F1F4FC"/>
-            <path d="M54 106 a46 46 0 0 1 92 0 Z" fill="#1A3FA8"/>
-          </svg>
-        </div>
-        <div>
-          <h2>From the Mayor's office</h2>
-          <blockquote>&ldquo;New Losanti works when residents can see how decisions are made. Our doors, and our records, are open.&rdquo;</blockquote>
-          <p><cite>Mayor Marguerite Vance</cite> &middot; <a href="#">Read the full statement</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Mayor -->
+  <section class="block" id="mayor">
+    <div class="wrap">
+      <div class="mayor">
+        <div class="portrait-wrap">
+          <!-- Abstract placeholder portrait: swap for your own artwork -->
+          <svg class="portrait" viewBox="0 0 200 250" role="img" aria-label="Abstract placeholder portrait">
+            <rect width="200" height="250" fill="#0A0A0A"/>
+            <circle cx="148" cy="52" r="30" fill="#1A3FA8"/>
+            <path d="M16 250 a84 84 0 0 1 168 0 Z" fill="#D1202F"/>
+            <polygon points="68,250 100,196 132,250" fill="#F1F4FC"/>
+            <circle cx="100" cy="106" r="46" fill="#F1F4FC"/>
+            <path d="M54 106 a46 46 0 0 1 92 0 Z" fill="#1A3FA8"/>
+          </svg>
+        </div>
+        <div>
+          <h2>From the Mayor's office</h2>
+          <blockquote>&ldquo;New Losanti works when residents can see how decisions are made. Our doors, and our records, are open.&rdquo;</blockquote>
+          <p><cite>Mayor Marguerite Vance</cite> &middot; <a href="#">Read the full statement</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Agencies -->
-  <section class="block alt" id="agencies">
-    <div class="wrap">
-      <div class="head"><h2>Departments &amp; offices</h2><a href="#">A to Z directory</a></div>
-      <ul class="agencies">
-        <li><a href="#">Office of the Mayor</a></li>
-        <li><a href="#">City Clerk</a></li>
-        <li><a href="#">Department of Buildings</a></li>
-        <li><a href="#">Department of Finance</a></li>
-        <li><a href="#">Department of Public Works</a></li>
-        <li><a href="#">Department of Health</a></li>
-        <li><a href="#">River Authority</a></li>
-        <li><a href="#">Flood Control District</a></li>
-        <li><a href="#">New Losanti Police</a></li>
-        <li><a href="#">Fire &amp; Rescue</a></li>
-        <li><a href="#">Parks &amp; Recreation</a></li>
-        <li><a href="#">Housing &amp; Rent Board</a></li>
-        <li><a href="#">Office of Records</a></li>
-        <li><a href="#">Planning Commission</a></li>
-        <li><a href="#">Public Library System</a></li>
-        <li><a href="#">Inspector General</a></li>
-      </ul>
-    </div>
-  </section>
+  <!-- Agencies -->
+  <section class="block alt" id="agencies">
+    <div class="wrap">
+      <div class="head"><h2>Departments &amp; offices</h2><a href="#">A to Z directory</a></div>
+      <ul class="agencies">
+        <li><a href="#">Office of the Mayor</a></li>
+        <li><a href="#">City Clerk</a></li>
+        <li><a href="#">Department of Buildings</a></li>
+        <li><a href="#">Department of Finance</a></li>
+        <li><a href="#">Department of Public Works</a></li>
+        <li><a href="#">Department of Health</a></li>
+        <li><a href="#">River Authority</a></li>
+        <li><a href="#">Flood Control District</a></li>
+        <li><a href="#">New Losanti Police</a></li>
+        <li><a href="#">Fire &amp; Rescue</a></li>
+        <li><a href="#">Parks &amp; Recreation</a></li>
+        <li><a href="#">Housing &amp; Rent Board</a></li>
+        <li><a href="#">Office of Records</a></li>
+        <li><a href="#">Planning Commission</a></li>
+        <li><a href="#">Public Library System</a></li>
+        <li><a href="#">Inspector General</a></li>
+      </ul>
+    </div>
+  </section>
 
-  <!-- Report -->
-  <section class="block" id="report">
-    <div class="wrap">
-      <div class="head"><h2>Report a problem</h2></div>
-      <div class="report">
-        <a href="#">
-          <b>Streets &amp; sidewalks</b><span>Potholes, broken lights, blocked drains.</span>
-          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#D1202F"/></svg>
-        </a>
-        <a href="#">
-          <b>Noise &amp; nuisance</b><span>Construction, late-night, and riverfront noise.</span>
-          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,2 98,96 2,96" fill="#F1F4FC"/></svg>
-        </a>
-        <a href="#">
-          <b>River &amp; riverbank</b><span>Debris, spills, erosion, and flooded paths.</span>
-          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="10" width="80" height="80" fill="#0A0A0A"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- Report -->
+  <section class="block" id="report">
+    <div class="wrap">
+      <div class="head"><h2>Report a problem</h2></div>
+      <div class="report">
+        <a href="#">
+          <b>Streets &amp; sidewalks</b><span>Potholes, broken lights, blocked drains.</span>
+          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#D1202F"/></svg>
+        </a>
+        <a href="#">
+          <b>Noise &amp; nuisance</b><span>Construction, late-night, and riverfront noise.</span>
+          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,2 98,96 2,96" fill="#F1F4FC"/></svg>
+        </a>
+        <a href="#">
+          <b>River &amp; riverbank</b><span>Debris, spills, erosion, and flooded paths.</span>
+          <svg class="shape" viewBox="0 0 100 100" aria-hidden="true"><rect x="10" y="10" width="80" height="80" fill="#0A0A0A"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
 </div><!-- /home-view -->
 
-<!-- ===== REPORT VIEW (FormSubmit email report form) ===== -->
-<div id="report-view" hidden>
-  <section class="rp">
-    <div class="wrap">
-      <h1 id="rp-heading" tabindex="-1">Report vigilante activity</h1>
-      <div class="rule" aria-hidden="true"></div>
-      <p class="lede">Tell the Office of Public Safety about a masked or costumed person acting outside the law. Use this form for sightings only.</p>
-
-      <div class="rp-grid">
-        <div>
-          <div id="rp-formwrap">
-            <p class="rp-fiction"><strong>Fictional city; real email submission.</strong> This form is a roleplay prop, but submitting it will email the details you enter to the site owner. Do not include sensitive or emergency information.</p>
-            <form id="rp-form" action="https://formsubmit.co/iktruhs@gmail.com" method="POST">
-              <input type="hidden" name="_subject" value="New vigilante sighting report — New Losanti">
-              <input type="hidden" name="_template" value="table">
-              <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px">
-              <div class="rp-row">
-                <div class="rp-field"><label for="rp-date">Date of sighting</label><input id="rp-date" name="date" type="date" required></div>
-                <div class="rp-field"><label for="rp-time">Approximate time</label><input id="rp-time" name="time" type="time"></div>
-              </div>
-
-              <div class="rp-field">
-                <label for="rp-where">Where did you see it?</label>
-                <input id="rp-where" name="where" type="text" required placeholder="Cross streets or landmark, for example 4th and Main">
-              </div>
-
-              <fieldset>
-                <legend>What did you observe?</legend>
-                <div class="rp-opts">
-                  <label><input type="checkbox" name="seen" value="mask"> Masked or costumed figure</label>
-                  <label><input type="checkbox" name="seen" value="rooftop"> Rooftop or high-place movement</label>
-                  <label><input type="checkbox" name="seen" value="detained"> Person detained or restrained</label>
-                  <label><input type="checkbox" name="seen" value="damage"> Property damage</label>
-                  <label><input type="checkbox" name="seen" value="vehicle"> Unusual vehicle or equipment</label>
-                  <label><input type="checkbox" name="seen" value="other"> Something else</label>
-                </div>
-              </fieldset>
-
-              <div class="rp-row">
-                <div class="rp-field">
-                  <label for="rp-count">How many individuals?</label>
-                  <select id="rp-count" name="count"><option>One</option><option>Two</option><option>Three or more</option><option>Not sure</option></select>
-                </div>
-                <div class="rp-field">
-                  <label for="rp-dir">Direction of travel</label>
-                  <input id="rp-dir" name="dir" type="text" placeholder="Optional">
-                </div>
-              </div>
-
-              <fieldset>
-                <legend>Was anyone injured?</legend>
-                <div class="rp-opts inline">
-                  <label><input type="radio" name="injury" value="no"> No</label>
-                  <label><input type="radio" name="injury" value="yes"> Yes</label>
-                  <label><input type="radio" name="injury" value="unsure"> Not sure</label>
-                </div>
-              </fieldset>
-
-              <div class="rp-field">
-                <label for="rp-desc">Describe what happened</label>
-                <textarea id="rp-desc" name="desc" required></textarea>
-                <span class="hint">Describe what you saw, not what you assume. Include clothing, direction of travel, and any vehicles.</span>
-              </div>
-
-              <p id="rp-form-error" class="hint" role="alert" aria-live="assertive" hidden>Please complete the date of sighting, location, and description before submitting.</p>
-              <button class="rp-btn" type="submit">Submit report</button>
-            </form>
-          </div>
-
-          <div id="rp-done" class="rp-done" hidden>
-            <h2 id="rp-done-heading" tabindex="-1">Your report was received.</h2>
-            <p>Reference number <strong class="rp-refno" id="rp-ref"></strong></p>
-            <dl>
-              <dt>When</dt><dd id="rp-echo-when"></dd>
-              <dt>Where</dt><dd id="rp-echo-where"></dd>
-            </dl>
-            <p>This is a simulated confirmation for the fictional City of New Losanti website. No report was transmitted or stored, and no agency will review it. You will not receive a reply. If someone is in immediate danger, contact emergency services.</p>
-            <button class="rp-btn" type="button" id="rp-again">File another report</button>
-          </div>
-        </div>
-
-        <aside class="rp-side" aria-label="Before you file">
-          <h2>Before you file</h2>
-          <ul>
-            <li>If someone is in immediate danger, contact emergency services first.</li>
-            <li>Do not approach, follow, or confront the person.</li>
-            <li>Report what you saw, not what you assume.</li>
-            <li>The city does not authorize or endorse vigilante activity.</li>
-          </ul>
-        </aside>
-        <aside class="rp-side rp-hotline" aria-label="Fictional vigilante hotline" style="grid-column:1/-1;background:var(--flood);margin-top:-30px">
-          <h2>Vigilante hotline — immediate assistance</h2>
-          <p>In New Losanti, residents can reach the fictional Nightwatch desk at <strong>1-800-555-0147</strong>. This story-only hotline is not staffed and cannot provide real help.</p>
-          <p><strong>If this is a real emergency, contact your local emergency services.</strong> Do not approach or confront anyone.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
-</div><!-- /report-view -->
-
-<!-- ===== FICTIONAL VIGILANTE DIRECTORY ===== -->
-<div id="directory-view" hidden>
-  <section class="vd" id="known-vigilantes">
-    <div class="wrap">
-      <h1 tabindex="-1">Known &amp; wanted vigilantes</h1>
-      <p class="lede">A fictional public-information index compiled from unverified reports and city records.</p>
-      <p class="vd-notice"><strong>Fictional records only.</strong> Every name and description below is placeholder lorem ipsum created for this story. These are not real people, active warrants, or actionable public-safety information.</p>
-      <div class="vd-grid">
-        <article class="vd-card"><span class="status">PERSON OF INTEREST</span><h2>Vesper / Lorem Ipsum</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for nocturnal appearances near the riverfront and an unidentified insignia.</p></article>
-        <article class="vd-card"><span class="status">WANTED — FICTIONAL</span><h2>The Meridian / Dolor Sit</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reportedly associated with unexplained power outages and elaborate rooftop routes.</p></article>
-        <article class="vd-card"><span class="status">UNCONFIRMED IDENTITY</span><h2>Glasswing / Amet Consectetur</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for leaving coded messages and appearing near closed municipal buildings.</p></article>
-        <article class="vd-card"><span class="status">WANTED — FICTIONAL</span><h2>Red Ledger / Adipiscing Elit</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspected of exposing confidential dealings and disrupting private security operations.</p></article>
-        <article class="vd-card"><span class="status">PERSON OF INTEREST</span><h2>Northstar / Tempor Incididunt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Frequently mentioned in reports involving missing evidence and anonymous tips.</p></article>
-        <article class="vd-card"><span class="status">UNCONFIRMED IDENTITY</span><h2>Hollowpoint / Labore Dolore</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for appearing during storm warnings and assisting stranded residents before disappearing.</p></article>
-      </div>
-      <a class="vd-back" href="#report-sighting" data-report>← Return to vigilante report page</a>
-    </div>
-  </section>
-</div><!-- /directory-view -->
-
 <!-- ===== 404 VIEW ===== -->
 <div id="nf-view" hidden>
-  <section class="nf">
-    <div class="wrap">
-      <p class="code" aria-hidden="true">404</p>
-      <div class="rule" aria-hidden="true"></div>
-      <h1 id="nf-heading" tabindex="-1">We can't find that page.</h1>
-      <p>The address you followed doesn't match anything on the City of New Losanti website. The page may have moved, been renamed, or never been filed.</p>
-      <p>Address requested: <span class="path" id="nf-path">/</span></p>
-      <a class="btn" href="#" data-home>Go to the home page</a>
-    </div>
-  </section>
+  <section class="nf">
+    <div class="wrap">
+      <p class="code" aria-hidden="true">404</p>
+      <div class="rule" aria-hidden="true"></div>
+      <h1 id="nf-heading" tabindex="-1">We can't find that page.</h1>
+      <p>The address you followed doesn't match anything on the City of New Losanti website. The page may have moved, been renamed, or never been filed.</p>
+      <p>Address requested: <span class="path" id="nf-path">/</span></p>
+      <a class="btn" href="#" data-home>Go to the home page</a>
+    </div>
+  </section>
 </div><!-- /nf-view -->
 
 </main>
 
 <footer>
-  <div class="strip" aria-hidden="true"><i style="background:var(--flood)"></i><i style="background:var(--white)"></i><i style="background:var(--river)"></i><i style="background:var(--mist)"></i></div>
-  <div class="wrap inner">
-    <div class="grid">
-      <div>
-        <h3>City of New Losanti</h3>
-        <p>1 River Square<br>New Losanti<br>Main line: 409-7403</p>
-      </div>
-      <div>
-        <h3>Government</h3>
-        <ul><li><a href="#">Mayor</a></li><li><a href="#">City Council</a></li><li><a href="#">Budget</a></li><li><a href="#">Open data</a></li></ul>
-      </div>
-      <div>
-        <h3>Residents</h3>
-        <ul><li><a href="#">Services</a></li><li><a href="#">Jobs</a></li><li><a href="#">Events</a></li><li><a href="#">Accessibility</a></li></ul>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <ul><li><a href="#">Contact us</a></li><li><a href="#">Press office</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
-      </div>
-    </div>
-    <p class="fine"><strong>Fiction notice:</strong> The City of New Losanti, its officials, seal, departments, and all events on this page are invented for storytelling. The Ohio River and the John A. Roebling Suspension Bridge are real landmarks used only as backdrop, and nothing here describes their actual condition. Any resemblance to real governments or people is coincidental.</p>
-  </div>
+  <div class="strip" aria-hidden="true"><i style="background:var(--flood)"></i><i style="background:var(--white)"></i><i style="background:var(--river)"></i><i style="background:var(--mist)"></i></div>
+  <div class="wrap inner">
+    <div class="grid">
+      <div>
+        <h3>City of New Losanti</h3>
+        <p>801 Plum St<br>New Losanti<br>20 W Pike St<br>Main line: 409-7403</p>
+      </div>
+      <div>
+        <h3>Government</h3>
+        <ul><li><a href="#">Mayor</a></li><li><a href="#">City Council</a></li><li><a href="#">Budget</a></li><li><a href="#">Open data</a></li></ul>
+      </div>
+      <div>
+        <h3>Residents</h3>
+        <ul><li><a href="#">Services</a></li><li><a href="#">Jobs</a></li><li><a href="#">Events</a></li><li><a href="#">Accessibility</a></li></ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul><li><a href="#">Contact us</a></li><li><a href="#">Press office</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
+      </div>
+    </div>
+    <p class="fine"><strong>Fiction notice:</strong> The City of New Losanti, its officials, seal, departments, and all events on this page are invented for storytelling. The Ohio River and the John A. Roebling Suspension Bridge are real landmarks used only as backdrop, and nothing here describes their actual condition. Any resemblance to real governments or people is coincidental.</p>
+  </div>
 </footer>
 
 <script>
-/* 1. Link behavior.
-      - Links marked data-report open the vigilante report form.
-      - Every other link opens the 404 view, except the Home link, the logo,
-        and the skip link. Add data-keep to a link to let it behave normally.
-      Report submissions are posted to FormSubmit and emailed to the configured recipient. */
+/* 1. Every link opens the 404 view, except the Home link, the logo, and the
+      skip link. Add data-keep to a link to let it behave normally. */
 (function () {
-  var views = {
-    home:   document.getElementById('home-view'),
-    nf:     document.getElementById('nf-view'),
-    report: document.getElementById('report-view'),
-    directory: document.getElementById('directory-view')
-  };
-  var alertBar    = document.getElementById('alert');
-  var pathEl      = document.getElementById('nf-path');
-  var nfHeading   = document.getElementById('nf-heading');
-  var rpHeading   = document.getElementById('rp-heading');
-  var homeLink    = document.querySelector('nav.main a[data-home]');
-  var form        = document.getElementById('rp-form');
-  var formWrap    = document.getElementById('rp-formwrap');
-  var done        = document.getElementById('rp-done');
-  var doneHeading = document.getElementById('rp-done-heading');
-  var formError   = document.getElementById('rp-form-error');
-  var titles = {
-    home:   document.title,
-    nf:     'Page not found | City of New Losanti (Fictional)',
-    report: 'Report vigilante activity | City of New Losanti (Fictional)',
-    directory: 'Known & wanted vigilantes | City of New Losanti (Fictional)'
-  };
-  var hashes = { nf: '#page-not-found', report: '#report-sighting', directory: '#known-vigilantes' };
-  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var current = 'home';
+  var homeView = document.getElementById('home-view');
+  var nfView   = document.getElementById('nf-view');
+  var alertBar = document.getElementById('alert');
+  var pathEl   = document.getElementById('nf-path');
+  var heading  = document.getElementById('nf-heading');
+  var homeLink = document.querySelector('nav.main a[data-home]');
+  var homeTitle = document.title;
+  var on404 = false;
 
-  function slug(a) {
-    var el = a.querySelector('h3, b') || a;
-    var s = (el.textContent || '').toLowerCase()
-      .replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return '/' + (s || 'page');
-  }
+  function slug(a) {
+    var el = a.querySelector('h3, b') || a;
+    var s = (el.textContent || '').toLowerCase()
+      .replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return '/' + (s || 'page');
+  }
 
-  function fmtDate(v) {
-    var p = (v || '').split('-');
-    if (p.length !== 3) return v || '';
-    return MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
-  }
+  function showNotFound(path) {
+    pathEl.textContent = path;
+    homeView.hidden = true;
+    nfView.hidden = false;
+    if (alertBar) alertBar.hidden = true;
+    if (homeLink) homeLink.removeAttribute('aria-current');
+    document.title = 'Page not found | City of New Losanti (Fictional)';
+    if (!on404) {
+      try { history.pushState({ nf: 1 }, '', '#page-not-found'); } catch (e) {}
+    }
+    on404 = true;
+    window.scrollTo(0, 0);
+    heading.focus({ preventScroll: true });
+  }
 
-  function fmtTime(v) {
-    var p = (v || '').split(':');
-    if (p.length < 2) return '';
-    var h = +p[0];
-    var ap = h >= 12 ? 'p.m.' : 'a.m.';
-    return (h % 12 || 12) + ':' + p[1] + ' ' + ap;
-  }
+  function showHome() {
+    nfView.hidden = true;
+    homeView.hidden = false;
+    if (alertBar) alertBar.hidden = false;
+    if (homeLink) homeLink.setAttribute('aria-current', 'page');
+    document.title = homeTitle;
+    on404 = false;
+    window.scrollTo(0, 0);
+  }
 
-  function resetReport() {
-    form.reset();
-    if (formError) formError.hidden = true;
-    done.hidden = true;
-    formWrap.hidden = false;
-    var submitButton = form.querySelector('button[type="submit"]');
-    submitButton.disabled = false;
-    submitButton.textContent = 'Submit report';
-  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.hasAttribute('data-keep')) return;
+    e.preventDefault();
+    if (a.hasAttribute('data-home')) {
+      if (!on404) { window.scrollTo(0, 0); return; }
+      try {
+        if (history.state && history.state.nf) { history.back(); return; }
+      } catch (err) {}
+      showHome();
+      return;
+    }
+    showNotFound(slug(a));
+  });
 
-  function show(view) {
-    var wasHome = current === 'home';
-    for (var k in views) views[k].hidden = (k !== view);
-    if (alertBar) alertBar.hidden = (view !== 'home');
-    if (homeLink) {
-      if (view === 'home') homeLink.setAttribute('aria-current', 'page');
-      else homeLink.removeAttribute('aria-current');
-    }
-    document.title = titles[view];
-    resetReport();
-    if (view !== 'home') {
-      try {
-        if (wasHome) history.pushState({ v: view }, '', hashes[view]);
-        else history.replaceState({ v: view }, '', hashes[view]);
-      } catch (e) {}
-    }
-    current = view;
-    window.scrollTo(0, 0);
-    if (view === 'nf') nfHeading.focus({ preventScroll: true });
-    if (view === 'report') rpHeading.focus({ preventScroll: true });
-    if (view === 'directory') document.querySelector('#directory-view h1').focus({ preventScroll: true });
-  }
-
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a || a.hasAttribute('data-keep')) return;
-    e.preventDefault();
-    if (a.hasAttribute('data-home')) {
-      if (current === 'home') { window.scrollTo(0, 0); return; }
-      try {
-        if (history.state && history.state.v) { history.back(); return; }
-      } catch (err) {}
-      show('home');
-      return;
-    }
-    if (a.hasAttribute('data-report')) { show('report'); return; }
-    if (a.hasAttribute('data-directory')) { show('directory'); return; }
-    pathEl.textContent = slug(a);
-    show('nf');
-  });
-
-  window.addEventListener('popstate', function () {
-    if (current !== 'home') show('home');
-  });
-
-  /* Reports are submitted directly to FormSubmit by the browser.
-     The normal HTML form POST is intentionally not intercepted here. */
-  document.getElementById('rp-again').addEventListener('click', function () {
-    resetReport();
-    window.scrollTo(0, 0);
-    rpHeading.focus({ preventScroll: true });
-  });
+  window.addEventListener('popstate', function () {
+    if (on404) showHome();
+  });
 })();
 
 /* 2. Hero artwork: layers drift slightly with the pointer.
-      Skipped when the visitor prefers reduced motion. */
+      Skipped when the visitor prefers reduced motion. */
 (function () {
-  var art = document.querySelector('.art-wrap');
-  if (!art || !window.matchMedia) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var layers = art.querySelectorAll('.par');
-  art.addEventListener('pointermove', function (e) {
-    var r = art.getBoundingClientRect();
-    var nx = (e.clientX - r.left) / r.width - 0.5;
-    var ny = (e.clientY - r.top) / r.height - 0.5;
-    for (var i = 0; i < layers.length; i++) {
-      var dx = parseFloat(layers[i].getAttribute('data-x')) || 0;
-      var dy = parseFloat(layers[i].getAttribute('data-y')) || 0;
-      layers[i].style.transform = 'translate(' + (nx * dx * 2) + 'px,' + (ny * dy * 2) + 'px)';
-    }
-  });
-  art.addEventListener('pointerleave', function () {
-    for (var i = 0; i < layers.length; i++) layers[i].style.transform = '';
-  });
+  var art = document.querySelector('.art-wrap');
+  if (!art || !window.matchMedia) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var layers = art.querySelectorAll('.par');
+  art.addEventListener('pointermove', function (e) {
+    var r = art.getBoundingClientRect();
+    var nx = (e.clientX - r.left) / r.width - 0.5;
+    var ny = (e.clientY - r.top) / r.height - 0.5;
+    for (var i = 0; i < layers.length; i++) {
+      var dx = parseFloat(layers[i].getAttribute('data-x')) || 0;
+      var dy = parseFloat(layers[i].getAttribute('data-y')) || 0;
+      layers[i].style.transform = 'translate(' + (nx * dx * 2) + 'px,' + (ny * dy * 2) + 'px)';
+    }
+  });
+  art.addEventListener('pointerleave', function () {
+    for (var i = 0; i < layers.length; i++) layers[i].style.transform = '';
+  });
 })();
 </script>
 </body>
