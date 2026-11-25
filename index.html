@@ -12,14 +12,16 @@
 <!--
   ============================================================
   TEMPLATE NOTES
-  - New Losanti is an invented city on the invented Ohio River.
-    Rename it by searching for "New Losanti" and "Ohio River"
-    and replacing them everywhere.
+  - New Losanti is an invented city set on the real Ohio River.
+    Rename it by searching for "New Losanti" and replacing it
+    everywhere.
   - Recolor the whole site from the :root variables below.
-  - Phone numbers use the 555-01xx range reserved for fiction.
   - The "fiction notice" bar and footer note are meant to stay.
   - This page has no logins, payments, or data-collecting forms.
-    All links point to "#" so you can wire them to your own pages.
+  - LINKS: every link opens a 404 page (see the script at the
+    bottom of this file). The Home link, the logo, and the skip
+    link are the only exceptions. To point a link at a real page
+    later, add the attribute data-keep to it.
   ============================================================
 -->
 
@@ -41,6 +43,7 @@
   --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--foam);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
 a{color:var(--river);text-underline-offset:3px}
@@ -157,6 +160,17 @@ section.block.alt{background:var(--mist)}
 .report b{font-family:var(--head);font-size:1.25rem;display:block;margin-bottom:4px}
 .report span{font-size:.93rem;opacity:.9}
 
+/* 404 view */
+.nf{padding:72px 0 88px}
+.nf .code{font-family:var(--head);font-weight:700;font-size:clamp(5rem,16vw,10rem);line-height:.85;color:var(--river);margin:0 0 14px;letter-spacing:-.02em}
+.nf .rule{width:96px;height:6px;border-radius:3px;background:var(--brass);margin:0 0 28px}
+.nf h1{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:.4em}
+.nf h1:focus{outline:none}
+.nf p{font-size:1.08rem}
+.nf .path{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.95rem;background:var(--mist);color:var(--river-ink);padding:3px 9px;border-radius:var(--radius);word-break:break-all}
+.nf .btn{display:inline-block;margin-top:10px;background:var(--river);color:var(--white);padding:13px 22px;border-radius:var(--radius);text-decoration:none;font-weight:600}
+.nf .btn:hover{background:var(--flood);color:var(--white)}
+
 /* Footer */
 footer{background:var(--river-ink);color:#CFDDE8;padding:40px 0 28px;margin-top:20px}
 footer .grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
@@ -183,13 +197,14 @@ footer .fine strong{color:var(--brass)}
   .agencies{columns:1}
   footer .grid{grid-template-columns:1fr}
   nav.main a{padding:11px 14px}
+  .nf{padding:48px 0 64px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 
 <body>
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main" data-keep>Skip to main content</a>
 
 <!-- KEEP: fiction notice -->
 <div class="fiction" role="note">
@@ -198,7 +213,7 @@ footer .fine strong{color:var(--brass)}
 
 <header class="masthead">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="City of New Losanti home">
+    <a class="brand" href="#" data-home aria-label="City of New Losanti home">
       <!-- Original seal: stone bridge, sun, river -->
       <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
         <circle cx="50" cy="50" r="48" fill="#1B3F5C"/>
@@ -229,7 +244,7 @@ footer .fine strong{color:var(--brass)}
 <nav class="main" aria-label="Main">
   <div class="wrap">
     <ul>
-      <li><a href="#" aria-current="page">Home</a></li>
+      <li><a href="#" data-home aria-current="page">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#mayor">Mayor</a></li>
@@ -241,7 +256,7 @@ footer .fine strong{color:var(--brass)}
 </nav>
 
 <!-- Alert banner: edit or delete -->
-<div class="alert" role="region" aria-label="City alert">
+<div class="alert" id="alert" role="region" aria-label="City alert">
   <div class="wrap">
     <span class="tag">River advisory</span>
     <p><strong>The Ohio River is running 2 feet above normal.</strong> The Riverwalk is closed between 3rd and 7th Streets, and one lane of the John A. Roebling Suspension Bridge is shut for inspection. <a href="#">See details</a></p>
@@ -249,6 +264,9 @@ footer .fine strong{color:var(--brass)}
 </div>
 
 <main id="main">
+
+<!-- ===== HOME VIEW ===== -->
+<div id="home-view">
 
   <!-- Hero -->
   <section class="hero">
@@ -388,6 +406,22 @@ footer .fine strong{color:var(--brass)}
     </div>
   </section>
 
+</div><!-- /home-view -->
+
+<!-- ===== 404 VIEW ===== -->
+<div id="nf-view" hidden>
+  <section class="nf">
+    <div class="wrap">
+      <p class="code" aria-hidden="true">404</p>
+      <div class="rule" aria-hidden="true"></div>
+      <h1 id="nf-heading" tabindex="-1">We can't find that page.</h1>
+      <p>The address you followed doesn't match anything on the City of New Losanti website. The page may have moved, been renamed, or never been filed.</p>
+      <p>Address requested: <span class="path" id="nf-path">/</span></p>
+      <a class="btn" href="#" data-home>Go to the home page</a>
+    </div>
+  </section>
+</div><!-- /nf-view -->
+
 </main>
 
 <footer>
@@ -410,8 +444,74 @@ footer .fine strong{color:var(--brass)}
         <ul><li><a href="#">Contact us</a></li><li><a href="#">Press office</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
       </div>
     </div>
-    <p class="fine"><strong>Fiction notice:</strong> The City of New Losanti, the Ohio River, its officials, seal, departments, and all events on this page are invented for storytelling. Any resemblance to real governments or people is coincidental.</p>
+    <p class="fine"><strong>Fiction notice:</strong> The City of New Losanti, its officials, seal, departments, and all events on this page are invented for storytelling. The Ohio River and the John A. Roebling Suspension Bridge are real landmarks used only as backdrop, and nothing here describes their actual condition. Any resemblance to real governments or people is coincidental.</p>
   </div>
 </footer>
+
+<script>
+/* Every link opens the 404 view, except the Home link, the logo, and the
+   skip link. Add data-keep to a link to let it behave normally. */
+(function () {
+  var homeView = document.getElementById('home-view');
+  var nfView   = document.getElementById('nf-view');
+  var alertBar = document.getElementById('alert');
+  var pathEl   = document.getElementById('nf-path');
+  var heading  = document.getElementById('nf-heading');
+  var homeLink = document.querySelector('nav.main a[data-home]');
+  var homeTitle = document.title;
+  var on404 = false;
+
+  function slug(a) {
+    var el = a.querySelector('h3, b') || a;
+    var s = (el.textContent || '').toLowerCase()
+      .replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return '/' + (s || 'page');
+  }
+
+  function showNotFound(path) {
+    pathEl.textContent = path;
+    homeView.hidden = true;
+    nfView.hidden = false;
+    if (alertBar) alertBar.hidden = true;
+    if (homeLink) homeLink.removeAttribute('aria-current');
+    document.title = 'Page not found | City of New Losanti (Fictional)';
+    if (!on404) {
+      try { history.pushState({ nf: 1 }, '', '#page-not-found'); } catch (e) {}
+    }
+    on404 = true;
+    window.scrollTo(0, 0);
+    heading.focus({ preventScroll: true });
+  }
+
+  function showHome() {
+    nfView.hidden = true;
+    homeView.hidden = false;
+    if (alertBar) alertBar.hidden = false;
+    if (homeLink) homeLink.setAttribute('aria-current', 'page');
+    document.title = homeTitle;
+    on404 = false;
+    window.scrollTo(0, 0);
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.hasAttribute('data-keep')) return;
+    e.preventDefault();
+    if (a.hasAttribute('data-home')) {
+      if (!on404) { window.scrollTo(0, 0); return; }
+      try {
+        if (history.state && history.state.nf) { history.back(); return; }
+      } catch (err) {}
+      showHome();
+      return;
+    }
+    showNotFound(slug(a));
+  });
+
+  window.addEventListener('popstate', function () {
+    if (on404) showHome();
+  });
+})();
+</script>
 </body>
 </html>
