@@ -27,6 +27,9 @@
     bottom of this file). The Home link, the logo, and the skip
     link are the only exceptions. To point a link at a real page
     later, add the attribute data-keep to it.
+  - The "Report a sighting" link carries data-report and opens a
+    fake vigilante report form. The form never sends or stores
+    anything; submitting it just shows a made-up reference number.
   ============================================================
 -->
 
@@ -101,11 +104,12 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--brass
 /* Hero */
 .hero{padding:72px 0 84px}
 .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.hero .grid > *{min-width:0}
 .hero p.lede{font-size:1.15rem;color:var(--muted)}
 .finder{margin-top:28px}
 .finder label{display:block;font-weight:700;margin-bottom:8px}
 .finder .row{display:flex;max-width:580px}
-.finder input{flex:1;font:inherit;padding:15px 16px;border:3px solid var(--river-ink);border-right:0;background:var(--white);min-width:0;border-radius:0}
+.finder input{flex:1;width:100%;font:inherit;padding:15px 16px;border:3px solid var(--river-ink);border-right:0;background:var(--white);min-width:0;border-radius:0}
 .finder button{font:inherit;font-weight:700;padding:0 26px;background:var(--river);color:var(--white);border:3px solid var(--river-ink);cursor:pointer;border-radius:0}
 .finder button:hover{background:var(--flood)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:.92rem}
@@ -215,6 +219,56 @@ section.block.alt{background:var(--mist)}
 .report span{position:relative;display:block;font-size:.95rem;max-width:26ch}
 .report .shape{position:absolute;right:-8%;bottom:-12%;width:66%;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .report a:hover .shape{transform:rotate(14deg) scale(1.06)}
+
+/* Report view (fake vigilante report form) */
+.rp{padding:64px 0 96px}
+.rp h1{font-size:clamp(2rem,4.4vw,3.4rem);margin-bottom:.35em}
+.rp h1:focus,.rp h2:focus{outline:none}
+.rp .rule{width:160px;height:14px;background:var(--flood);margin:0 0 26px}
+.rp .lede{font-size:1.15rem;color:var(--muted);max-width:60ch;margin-bottom:44px}
+.rp-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start}
+.rp-fiction{background:var(--mist);border-left:8px solid var(--river);padding:12px 16px;font-size:.92rem;margin:0 0 32px;max-width:none}
+.rp-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.rp-field{margin:0 0 26px}
+.rp-field > label,.rp fieldset legend{display:block;font-weight:700;margin-bottom:8px;padding:0}
+.rp fieldset{border:0;margin:0 0 26px;padding:0;min-width:0}
+.rp input[type=date],.rp input[type=time],.rp input[type=text],.rp select,.rp textarea{width:100%;font:inherit;padding:13px 14px;border:3px solid var(--river-ink);background:var(--white);color:var(--ink);border-radius:0}
+.rp textarea{min-height:150px;resize:vertical}
+.rp .hint{display:block;font-size:.88rem;color:var(--muted);margin-top:6px}
+.rp-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+.rp-opts.inline{display:flex;flex-wrap:wrap;gap:10px 26px}
+.rp-opts label{display:flex;gap:10px;align-items:flex-start;font-weight:500;cursor:pointer}
+.rp-opts input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--river);flex:none}
+.rp-btn{display:inline-block;background:var(--river);color:var(--white);padding:15px 30px;border:3px solid var(--river-ink);font:inherit;font-weight:700;cursor:pointer;border-radius:0}
+.rp-btn:hover{background:var(--flood)}
+.rp-side{position:relative;overflow:hidden;background:var(--river-ink);color:var(--white);padding:32px}
+.rp-side::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:var(--flood)}
+.rp-side > *{position:relative}
+.rp-side h2{color:var(--white);font-size:1.5rem;margin-bottom:16px}
+.rp-side ul{margin:0;padding-left:1.1em}
+.rp-side li{margin:0 0 12px}
+.rp-done{border:6px solid var(--river-ink);background:var(--pale);padding:34px}
+.rp-done h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+.rp-refno{display:inline-block;background:var(--river-ink);color:var(--white);padding:4px 12px;font-stretch:110%;font-weight:800;letter-spacing:.04em}
+.rp-done dl{margin:22px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px}
+.rp-done dt{font-weight:700}
+.rp-done dd{margin:0;word-break:break-word}
+@media (max-width:900px){.rp-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.rp{padding:44px 0 64px}.rp-row,.rp-opts{grid-template-columns:1fr}}
+
+/* Vigilante directory */
+.vd{padding:64px 0 96px}
+.vd h1{font-size:clamp(2rem,4.4vw,3.4rem);margin-bottom:.35em}
+.vd .lede{font-size:1.15rem;color:var(--muted);max-width:60ch;margin-bottom:30px}
+.vd-notice{background:#FFF0F1;border-left:8px solid var(--flood);padding:14px 18px;margin:0 0 32px;max-width:850px}
+.vd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:var(--river-ink);border:6px solid var(--river-ink)}
+.vd-card{background:var(--mist);padding:24px;min-height:190px}
+.vd-card:nth-child(2n){background:var(--white)}
+.vd-card .status{display:inline-block;background:var(--river-ink);color:white;padding:4px 9px;font-size:.78rem;font-weight:700;margin-bottom:12px}
+.vd-card h2{font-size:1.45rem;margin:0 0 8px}
+.vd-card p{margin:0;color:var(--muted)}
+.vd-back{display:inline-block;margin-top:28px;font-weight:700}
+@media(max-width:560px){.vd{padding:44px 0 64px}.vd-grid{grid-template-columns:1fr}}
 
 /* 404 view */
 .nf{padding:72px 0 96px}
@@ -330,7 +384,7 @@ footer .fine strong{color:var(--brass)}
   <div class="notice">
     <div class="wrap">
       <span class="tag">Public safety notice</span>
-      <p><strong>A masked vigilante has been reported on city streets after dark.</strong> Residents describe a figure in a bat-style mask. Do not approach or confront this person. The city does not authorize vigilante activity. <a href="#">Report a sighting</a></p>
+      <p><strong>A masked vigilante has been reported on city streets after dark.</strong> Residents describe a figure in a bat-style mask. Do not approach or confront this person. The city does not authorize vigilante activity. <a href="#" data-report>Report a sighting</a></p>
     </div>
   </div>
 </div>
@@ -592,6 +646,126 @@ footer .fine strong{color:var(--brass)}
 
 </div><!-- /home-view -->
 
+<!-- ===== REPORT VIEW (FormSubmit email report form) ===== -->
+<div id="report-view" hidden>
+  <section class="rp">
+    <div class="wrap">
+      <h1 id="rp-heading" tabindex="-1">Report vigilante activity</h1>
+      <div class="rule" aria-hidden="true"></div>
+      <p class="lede">Tell the Office of Public Safety about a masked or costumed person acting outside the law. Use this form for sightings only.</p>
+
+      <div class="rp-grid">
+        <div>
+          <div id="rp-formwrap">
+            <p class="rp-fiction"><strong>Fictional city; real email submission.</strong> This form is a roleplay prop, but submitting it will email the details you enter to the site owner. Do not include sensitive or emergency information.</p>
+            <form id="rp-form" action="https://formsubmit.co/iktruhs@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New vigilante sighting report — New Losanti">
+              <input type="hidden" name="_template" value="table">
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px">
+              <div class="rp-row">
+                <div class="rp-field"><label for="rp-date">Date of sighting</label><input id="rp-date" name="date" type="date" required></div>
+                <div class="rp-field"><label for="rp-time">Approximate time</label><input id="rp-time" name="time" type="time"></div>
+              </div>
+
+              <div class="rp-field">
+                <label for="rp-where">Where did you see it?</label>
+                <input id="rp-where" name="where" type="text" required placeholder="Cross streets or landmark, for example 4th and Main">
+              </div>
+
+              <fieldset>
+                <legend>What did you observe?</legend>
+                <div class="rp-opts">
+                  <label><input type="checkbox" name="seen" value="mask"> Masked or costumed figure</label>
+                  <label><input type="checkbox" name="seen" value="rooftop"> Rooftop or high-place movement</label>
+                  <label><input type="checkbox" name="seen" value="detained"> Person detained or restrained</label>
+                  <label><input type="checkbox" name="seen" value="damage"> Property damage</label>
+                  <label><input type="checkbox" name="seen" value="vehicle"> Unusual vehicle or equipment</label>
+                  <label><input type="checkbox" name="seen" value="other"> Something else</label>
+                </div>
+              </fieldset>
+
+              <div class="rp-row">
+                <div class="rp-field">
+                  <label for="rp-count">How many individuals?</label>
+                  <select id="rp-count" name="count"><option>One</option><option>Two</option><option>Three or more</option><option>Not sure</option></select>
+                </div>
+                <div class="rp-field">
+                  <label for="rp-dir">Direction of travel</label>
+                  <input id="rp-dir" name="dir" type="text" placeholder="Optional">
+                </div>
+              </div>
+
+              <fieldset>
+                <legend>Was anyone injured?</legend>
+                <div class="rp-opts inline">
+                  <label><input type="radio" name="injury" value="no"> No</label>
+                  <label><input type="radio" name="injury" value="yes"> Yes</label>
+                  <label><input type="radio" name="injury" value="unsure"> Not sure</label>
+                </div>
+              </fieldset>
+
+              <div class="rp-field">
+                <label for="rp-desc">Describe what happened</label>
+                <textarea id="rp-desc" name="desc" required></textarea>
+                <span class="hint">Describe what you saw, not what you assume. Include clothing, direction of travel, and any vehicles.</span>
+              </div>
+
+              <p id="rp-form-error" class="hint" role="alert" aria-live="assertive" hidden>Please complete the date of sighting, location, and description before submitting.</p>
+              <button class="rp-btn" type="submit">Submit report</button>
+            </form>
+          </div>
+
+          <div id="rp-done" class="rp-done" hidden>
+            <h2 id="rp-done-heading" tabindex="-1">Your report was received.</h2>
+            <p>Reference number <strong class="rp-refno" id="rp-ref"></strong></p>
+            <dl>
+              <dt>When</dt><dd id="rp-echo-when"></dd>
+              <dt>Where</dt><dd id="rp-echo-where"></dd>
+            </dl>
+            <p>This is a simulated confirmation for the fictional City of New Losanti website. No report was transmitted or stored, and no agency will review it. You will not receive a reply. If someone is in immediate danger, contact emergency services.</p>
+            <button class="rp-btn" type="button" id="rp-again">File another report</button>
+          </div>
+        </div>
+
+        <aside class="rp-side" aria-label="Before you file">
+          <h2>Before you file</h2>
+          <ul>
+            <li>If someone is in immediate danger, contact emergency services first.</li>
+            <li>Do not approach, follow, or confront the person.</li>
+            <li>Report what you saw, not what you assume.</li>
+            <li>The city does not authorize or endorse vigilante activity.</li>
+          </ul>
+        </aside>
+        <aside class="rp-side rp-hotline" aria-label="Fictional vigilante hotline" style="grid-column:1/-1;background:var(--flood);margin-top:-30px">
+          <h2>Vigilante hotline — immediate assistance</h2>
+          <p>In New Losanti, residents can reach the fictional Nightwatch desk at <strong>1-800-555-0147</strong>. This story-only hotline is not staffed and cannot provide real help.</p>
+          <p><strong>If this is a real emergency, contact your local emergency services.</strong> Do not approach or confront anyone.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div><!-- /report-view -->
+
+<!-- ===== FICTIONAL VIGILANTE DIRECTORY ===== -->
+<div id="directory-view" hidden>
+  <section class="vd" id="known-vigilantes">
+    <div class="wrap">
+      <h1 tabindex="-1">Known &amp; wanted vigilantes</h1>
+      <p class="lede">A fictional public-information index compiled from unverified reports and city records.</p>
+      <p class="vd-notice"><strong>Fictional records only.</strong> Every name and description below is placeholder lorem ipsum created for this story. These are not real people, active warrants, or actionable public-safety information.</p>
+      <div class="vd-grid">
+        <article class="vd-card"><span class="status">PERSON OF INTEREST</span><h2>Vesper / Lorem Ipsum</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for nocturnal appearances near the riverfront and an unidentified insignia.</p></article>
+        <article class="vd-card"><span class="status">WANTED — FICTIONAL</span><h2>The Meridian / Dolor Sit</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reportedly associated with unexplained power outages and elaborate rooftop routes.</p></article>
+        <article class="vd-card"><span class="status">UNCONFIRMED IDENTITY</span><h2>Glasswing / Amet Consectetur</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for leaving coded messages and appearing near closed municipal buildings.</p></article>
+        <article class="vd-card"><span class="status">WANTED — FICTIONAL</span><h2>Red Ledger / Adipiscing Elit</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspected of exposing confidential dealings and disrupting private security operations.</p></article>
+        <article class="vd-card"><span class="status">PERSON OF INTEREST</span><h2>Northstar / Tempor Incididunt</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Frequently mentioned in reports involving missing evidence and anonymous tips.</p></article>
+        <article class="vd-card"><span class="status">UNCONFIRMED IDENTITY</span><h2>Hollowpoint / Labore Dolore</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Known for appearing during storm warnings and assisting stranded residents before disappearing.</p></article>
+      </div>
+      <a class="vd-back" href="#report-sighting" data-report>← Return to vigilante report page</a>
+    </div>
+  </section>
+</div><!-- /directory-view -->
+
 <!-- ===== 404 VIEW ===== -->
 <div id="nf-view" hidden>
   <section class="nf">
@@ -614,7 +788,7 @@ footer .fine strong{color:var(--brass)}
     <div class="grid">
       <div>
         <h3>City of New Losanti</h3>
-        <p>801 Plum St<br>New Losanti<br>20 W Pike St<br>Main line: 409-7403</p>
+        <p>1 River Square<br>New Losanti<br>Main line: 409-7403</p>
       </div>
       <div>
         <h3>Government</h3>
@@ -634,17 +808,37 @@ footer .fine strong{color:var(--brass)}
 </footer>
 
 <script>
-/* 1. Every link opens the 404 view, except the Home link, the logo, and the
-      skip link. Add data-keep to a link to let it behave normally. */
+/* 1. Link behavior.
+      - Links marked data-report open the vigilante report form.
+      - Every other link opens the 404 view, except the Home link, the logo,
+        and the skip link. Add data-keep to a link to let it behave normally.
+      Report submissions are posted to FormSubmit and emailed to the configured recipient. */
 (function () {
-  var homeView = document.getElementById('home-view');
-  var nfView   = document.getElementById('nf-view');
-  var alertBar = document.getElementById('alert');
-  var pathEl   = document.getElementById('nf-path');
-  var heading  = document.getElementById('nf-heading');
-  var homeLink = document.querySelector('nav.main a[data-home]');
-  var homeTitle = document.title;
-  var on404 = false;
+  var views = {
+    home:   document.getElementById('home-view'),
+    nf:     document.getElementById('nf-view'),
+    report: document.getElementById('report-view'),
+    directory: document.getElementById('directory-view')
+  };
+  var alertBar    = document.getElementById('alert');
+  var pathEl      = document.getElementById('nf-path');
+  var nfHeading   = document.getElementById('nf-heading');
+  var rpHeading   = document.getElementById('rp-heading');
+  var homeLink    = document.querySelector('nav.main a[data-home]');
+  var form        = document.getElementById('rp-form');
+  var formWrap    = document.getElementById('rp-formwrap');
+  var done        = document.getElementById('rp-done');
+  var doneHeading = document.getElementById('rp-done-heading');
+  var formError   = document.getElementById('rp-form-error');
+  var titles = {
+    home:   document.title,
+    nf:     'Page not found | City of New Losanti (Fictional)',
+    report: 'Report vigilante activity | City of New Losanti (Fictional)',
+    directory: 'Known & wanted vigilantes | City of New Losanti (Fictional)'
+  };
+  var hashes = { nf: '#page-not-found', report: '#report-sighting', directory: '#known-vigilantes' };
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var current = 'home';
 
   function slug(a) {
     var el = a.querySelector('h3, b') || a;
@@ -653,29 +847,51 @@ footer .fine strong{color:var(--brass)}
     return '/' + (s || 'page');
   }
 
-  function showNotFound(path) {
-    pathEl.textContent = path;
-    homeView.hidden = true;
-    nfView.hidden = false;
-    if (alertBar) alertBar.hidden = true;
-    if (homeLink) homeLink.removeAttribute('aria-current');
-    document.title = 'Page not found | City of New Losanti (Fictional)';
-    if (!on404) {
-      try { history.pushState({ nf: 1 }, '', '#page-not-found'); } catch (e) {}
-    }
-    on404 = true;
-    window.scrollTo(0, 0);
-    heading.focus({ preventScroll: true });
+  function fmtDate(v) {
+    var p = (v || '').split('-');
+    if (p.length !== 3) return v || '';
+    return MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
   }
 
-  function showHome() {
-    nfView.hidden = true;
-    homeView.hidden = false;
-    if (alertBar) alertBar.hidden = false;
-    if (homeLink) homeLink.setAttribute('aria-current', 'page');
-    document.title = homeTitle;
-    on404 = false;
+  function fmtTime(v) {
+    var p = (v || '').split(':');
+    if (p.length < 2) return '';
+    var h = +p[0];
+    var ap = h >= 12 ? 'p.m.' : 'a.m.';
+    return (h % 12 || 12) + ':' + p[1] + ' ' + ap;
+  }
+
+  function resetReport() {
+    form.reset();
+    if (formError) formError.hidden = true;
+    done.hidden = true;
+    formWrap.hidden = false;
+    var submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = false;
+    submitButton.textContent = 'Submit report';
+  }
+
+  function show(view) {
+    var wasHome = current === 'home';
+    for (var k in views) views[k].hidden = (k !== view);
+    if (alertBar) alertBar.hidden = (view !== 'home');
+    if (homeLink) {
+      if (view === 'home') homeLink.setAttribute('aria-current', 'page');
+      else homeLink.removeAttribute('aria-current');
+    }
+    document.title = titles[view];
+    resetReport();
+    if (view !== 'home') {
+      try {
+        if (wasHome) history.pushState({ v: view }, '', hashes[view]);
+        else history.replaceState({ v: view }, '', hashes[view]);
+      } catch (e) {}
+    }
+    current = view;
     window.scrollTo(0, 0);
+    if (view === 'nf') nfHeading.focus({ preventScroll: true });
+    if (view === 'report') rpHeading.focus({ preventScroll: true });
+    if (view === 'directory') document.querySelector('#directory-view h1').focus({ preventScroll: true });
   }
 
   document.addEventListener('click', function (e) {
@@ -683,18 +899,29 @@ footer .fine strong{color:var(--brass)}
     if (!a || a.hasAttribute('data-keep')) return;
     e.preventDefault();
     if (a.hasAttribute('data-home')) {
-      if (!on404) { window.scrollTo(0, 0); return; }
+      if (current === 'home') { window.scrollTo(0, 0); return; }
       try {
-        if (history.state && history.state.nf) { history.back(); return; }
+        if (history.state && history.state.v) { history.back(); return; }
       } catch (err) {}
-      showHome();
+      show('home');
       return;
     }
-    showNotFound(slug(a));
+    if (a.hasAttribute('data-report')) { show('report'); return; }
+    if (a.hasAttribute('data-directory')) { show('directory'); return; }
+    pathEl.textContent = slug(a);
+    show('nf');
   });
 
   window.addEventListener('popstate', function () {
-    if (on404) showHome();
+    if (current !== 'home') show('home');
+  });
+
+  /* Reports are submitted directly to FormSubmit by the browser.
+     The normal HTML form POST is intentionally not intercepted here. */
+  document.getElementById('rp-again').addEventListener('click', function () {
+    resetReport();
+    window.scrollTo(0, 0);
+    rpHeading.focus({ preventScroll: true });
   });
 })();
 
