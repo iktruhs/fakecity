@@ -1,1 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .sidebar {
+            width: 300px;
+            min-width: 300px;
+            max-width: 300px;
+            height: 100vh;
+            background: #111;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-right: 1px solid #1a1a1a;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h1 {
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        .control-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #444;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-group label {
+            font-size: 0.7rem;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-group label span {
+            color: #555;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            background: #222;
+            border-radius: 2px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #666;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #888;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #888;
+            font-size: 0.8rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #555;
+            color: #fff;
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .color-picker-wrapper label {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            background: transparent;
+            padding: 2px;
+        }
+
+        .no-fill-btn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #555;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .no-fill-btn:hover {
+            border-color: #555;
+            color: #666;
+        }
+
+        .no-fill-btn.active {
+            background: #2a2a2a;
+            border-color: #666;
+            color: #888;
+        }
+
+        .no-fill-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #666;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 0.75rem;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .drop-zone {
+            width: 100%;
+            height: 120px;
+            border: 2px dashed #333;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #0d0d0d;
+            overflow: hidden;
+        }
+
+        .drop-zone:hover {
+            border-color: #555;
+            background: #151515;
+        }
+
+        .drop-zone.has-image {
+            border-color: transparent;
+            border: none;
+        }
+
+        .drop-zone img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .drop-zone-text {
+            color: #555;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .drop-zone-text span {
+            color: #777;
+            text-decoration: underline;
+        }
+
+        #fileInput, #fontFileInput {
+            display: none;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #888;
+            font-size: 0.85rem;
+            font-family: 'Space Grotesque', sans-serif;
+            resize: none;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #555;
+            color: #fff;
+        }
+
+        .text-input::placeholder {
+            color: #444;
+        }
+
+        .font-upload-zone {
+            width: 100%;
+            height: 50px;
+            border: 1px dashed #333;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #0d0d0d;
+            font-size: 0.7rem;
+            color: #555;
+        }
+
+        .font-upload-zone:hover {
+            border-color: #555;
+            background: #151515;
+        }
+
+        .font-upload-zone span {
+            color: #777;
+            text-decoration: underline;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #888;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: #252525;
+            color: #fff;
+            border-color: #444;
+        }
+
+        button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            padding: 0;
+            background: #0a0a0a;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .output-container {
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .output-container svg {
+            width: 100%;
+            height: 100%;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            shape-rendering: crispEdges;
+        }
+
+        .placeholder {
+            color: #333;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+
+<!-- GoatCounter analytics + timezone capture -->
+<script>
+  window.goatcounter = {
+    path: function (p) {
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        var hour = new Date().getHours();
+        return p + '?tz=' + encodeURIComponent(tz) + '&localhour=' + hour;
+      } catch (e) {
+        return p;
+      }
+    }
+  };
+</script>
+<script data-goatcounter="https://apmx30.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Line Visualizer</h1>
+
+        <div class="control-section">
+            <div class="section-title">Input</div>
+            <div class="drop-zone" id="dropZone">
+                <span class="drop-zone-text">Drop image or <span>browse</span></span>
+            </div>
+            <input type="file" id="fileInput" accept="image/*">
+            <div class="control-group">
+                <label>Image Fit</label>
+                <select id="imageFit">
+                    <option value="cover">Cover (fill canvas)</option>
+                    <option value="contain">Contain (fit inside)</option>
+                    <option value="stretch">Stretch to canvas</option>
+                    <option value="original">Original size</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Canvas Preset</label>
+                <select id="canvasPreset">
+                    <option value="1920,1080">1920 × 1080 (16:9)</option>
+                    <option value="1080,1080">1080 × 1080 (1:1)</option>
+                    <option value="1080,1920">1080 × 1920 (9:16)</option>
+                    <option value="1200,630">1200 × 630 (Social)</option>
+                    <option value="1500,500">1500 × 500 (Twitter)</option>
+                    <option value="1280,720">1280 × 720 (HD)</option>
+                    <option value="1440,900">1440 × 900 (16:10)</option>
+                    <option value="2560,1440">2560 × 1440 (1440p)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <div class="section-title">Grid</div>
+            <div class="control-group">
+                <label>Columns <span id="columnsValue">30</span></label>
+                <input type="range" id="columns" min="1" max="150" value="30">
+            </div>
+            <div class="control-group">
+                <label>Rows <span id="rowsValue">30</span></label>
+                <input type="range" id="rows" min="1" max="150" value="30">
+            </div>
+            <div class="control-group">
+                <label>Gap <span id="gapValue">0px</span></label>
+                <input type="range" id="gap" min="0" max="10" value="0">
+            </div>
+        </div>
+
+        <div class="control-section">
+            <div class="section-title">Style</div>
+            <div class="control-group">
+                <label>Max Thickness <span id="maxThicknessValue">2px</span></label>
+                <input type="range" id="maxThickness" min="1" max="30" value="2">
+            </div>
+            <div class="control-group">
+                <label>Contrast <span id="contrastValue">1.0x</span></label>
+                <input type="range" id="contrast" min="50" max="300" value="100">
+            </div>
+            <div class="control-group">
+                <label>Quantize <span id="quantizeValue">Off</span></label>
+                <input type="range" id="quantize" min="0" max="20" value="0">
+            </div>
+            <div class="color-picker-wrapper">
+                <label>Line Color</label>
+                <input type="color" id="lineColor" value="#ffffff">
+                <button class="no-fill-btn" id="lineNoFill" title="No Fill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="4" y1="4" x2="20" y2="20"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="color-picker-wrapper">
+                <label>Background</label>
+                <input type="color" id="bgColor" value="#0a0a0a">
+                <button class="no-fill-btn" id="bgNoFill" title="No Fill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="4" y1="4" x2="20" y2="20"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <div class="section-title">Text Overlay</div>
+            <textarea id="textInput" class="text-input" rows="2" placeholder="Type text here..."></textarea>
+            <div class="control-group">
+                <label>Font Size <span id="fontSizeValue">48px</span></label>
+                <input type="range" id="fontSize" min="12" max="800" value="48">
+            </div>
+            <div class="control-group">
+                <label>Text Color <span id="textColorValue">#ffffff</span></label>
+                <input type="color" id="textColor" value="#ffffff">
+            </div>
+            <div class="control-group">
+                <label>Text X <span id="textXValue">50%</span></label>
+                <input type="range" id="textX" min="0" max="100" value="50">
+            </div>
+            <div class="control-group">
+                <label>Text Y <span id="textYValue">50%</span></label>
+                <input type="range" id="textY" min="0" max="100" value="50">
+            </div>
+            <label style="font-size: 0.7rem; color: #555; margin-bottom: 6px;">Upload Custom Font</label>
+            <div class="font-upload-zone" id="fontDropZone">
+                <span>Drop font file or <span>browse</span></span>
+            </div>
+            <input type="file" id="fontFileInput" accept=".ttf,.otf,.woff,.woff2">
+        </div>
+
+        <div class="control-section">
+            <div class="section-title">Animation</div>
+            <div class="control-group">
+                <label>Duration <span id="animDurationValue">2.0s</span></label>
+                <input type="range" id="animDuration" min="1" max="4" step="0.5" value="2">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="downloadBtn" disabled>Download SVG</button>
+            <button id="downloadPngBtn" disabled>Download PNG</button>
+            <button id="previewAnimBtn" disabled>Preview Animation</button>
+            <button id="exportWebmBtn" disabled>Export WebM</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="output-container" id="outputContainer">
+            <div class="placeholder">Upload image to generate</div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const outputContainer = document.getElementById('outputContainer');
+        const columnsSlider = document.getElementById('columns');
+        const rowsSlider = document.getElementById('rows');
+        const gapSlider = document.getElementById('gap');
+        const maxThicknessSlider = document.getElementById('maxThickness');
+        const contrastSlider = document.getElementById('contrast');
+        const quantizeSlider = document.getElementById('quantize');
+        const lineColorPicker = document.getElementById('lineColor');
+        const bgColorPicker = document.getElementById('bgColor');
+        const animDurationSlider = document.getElementById('animDuration');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadPngBtn = document.getElementById('downloadPngBtn');
+        const previewAnimBtn = document.getElementById('previewAnimBtn');
+        const exportWebmBtn = document.getElementById('exportWebmBtn');
+        const textInput = document.getElementById('textInput');
+        const fontSizeSlider = document.getElementById('fontSize');
+        const textColorPicker = document.getElementById('textColor');
+        const textXSlider = document.getElementById('textX');
+        const textYSlider = document.getElementById('textY');
+        const fontDropZone = document.getElementById('fontDropZone');
+        const fontFileInput = document.getElementById('fontFileInput');
+        const imageFitSelect = document.getElementById('imageFit');
+        const canvasPresetSelect = document.getElementById('canvasPreset');
+
+        let currentImage = null;
+        let originalImageWidth = 0;
+        let originalImageHeight = 0;
+        let currentWidth = 1920;
+        let currentHeight = 1080;
+        let svgString = '';
+        let previewAnimId = null;
+        let customFont = null;
+        let currentFontFamily = "'Space Grotesque', sans-serif";
+        let defaultCanvas = null;
+        let lineNoFill = false;
+        let bgNoFill = false;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#555';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = '#333';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#333';
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                loadImage(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                loadImage(file);
+            }
+        });
+
+        [columnsSlider, rowsSlider, gapSlider, maxThicknessSlider, contrastSlider, quantizeSlider, lineColorPicker, bgColorPicker].forEach(control => {
+            control.addEventListener('input', () => {
+                updateValueDisplays();
+                if (control === lineColorPicker) {
+                    lineNoFill = false;
+                    document.getElementById('lineNoFill').classList.remove('active');
+                }
+                if (control === bgColorPicker) {
+                    bgNoFill = false;
+                    document.getElementById('bgNoFill').classList.remove('active');
+                }
+                if (currentImage || textInput.value.trim()) renderLines();
+            });
+        });
+
+        document.getElementById('lineNoFill').addEventListener('click', function() {
+            lineNoFill = !lineNoFill;
+            this.classList.toggle('active');
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        document.getElementById('bgNoFill').addEventListener('click', function() {
+            bgNoFill = !bgNoFill;
+            this.classList.toggle('active');
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        animDurationSlider.addEventListener('input', updateValueDisplays);
+
+        textInput.addEventListener('input', () => {
+            renderLines();
+        });
+
+        fontSizeSlider.addEventListener('input', () => {
+            updateValueDisplays();
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        textColorPicker.addEventListener('input', () => {
+            updateValueDisplays();
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        textXSlider.addEventListener('input', () => {
+            updateValueDisplays();
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        textYSlider.addEventListener('input', () => {
+            updateValueDisplays();
+            if (currentImage || textInput.value.trim()) renderLines();
+        });
+
+        imageFitSelect.addEventListener('change', () => {
+            if (currentImage) {
+                updateCanvasDimensions();
+            }
+            if (currentImage || textInput.value.trim()) {
+                renderLines();
+            }
+        });
+
+        canvasPresetSelect.addEventListener('change', () => {
+            const [w, h] = canvasPresetSelect.value.split(',').map(Number);
+            currentWidth = w;
+            currentHeight = h;
+            if (currentImage) {
+                updateCanvasDimensions();
+            }
+            if (currentImage || textInput.value.trim()) {
+                renderLines();
+            }
+        });
+
+        fontDropZone.addEventListener('click', () => fontFileInput.click());
+
+        fontDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fontDropZone.style.borderColor = '#555';
+        });
+
+        fontDropZone.addEventListener('dragleave', () => {
+            fontDropZone.style.borderColor = '#333';
+        });
+
+        fontDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fontDropZone.style.borderColor = '#333';
+            const file = e.dataTransfer.files[0];
+            if (file && (file.name.endsWith('.ttf') || file.name.endsWith('.otf') || file.name.endsWith('.woff') || file.name.endsWith('.woff2'))) {
+                loadCustomFont(file);
+            }
+        });
+
+        fontFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                loadCustomFont(file);
+            }
+        });
+
+        function loadCustomFont(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const fontName = 'CustomFont_' + Date.now();
+                const fontFace = new FontFace(fontName, `url(${e.target.result})`);
+                fontFace.load().then((loadedFace) => {
+                    document.fonts.add(loadedFace);
+                    customFont = fontName;
+                    currentFontFamily = `'${fontName}', 'Space Grotesque', sans-serif`;
+                    fontDropZone.innerHTML = `<span>Font: ${file.name}</span>`;
+                    renderLines();
+                }).catch(err => {
+                    console.error('Failed to load font:', err);
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateValueDisplays() {
+            document.getElementById('columnsValue').textContent = columnsSlider.value;
+            document.getElementById('rowsValue').textContent = rowsSlider.value;
+            document.getElementById('gapValue').textContent = gapSlider.value + 'px';
+            document.getElementById('maxThicknessValue').textContent = maxThicknessSlider.value + 'px';
+            document.getElementById('contrastValue').textContent = (contrastSlider.value / 100).toFixed(1) + 'x';
+            document.getElementById('quantizeValue').textContent = quantizeSlider.value === '0' ? 'Off' : quantizeSlider.value;
+            document.getElementById('animDurationValue').textContent = parseFloat(animDurationSlider.value).toFixed(1) + 's';
+            document.getElementById('fontSizeValue').textContent = fontSizeSlider.value + 'px';
+            document.getElementById('textColorValue').textContent = textColorPicker.value;
+            document.getElementById('textXValue').textContent = textXSlider.value + '%';
+            document.getElementById('textYValue').textContent = textYSlider.value + '%';
+        }
+
+        function updateCanvasDimensions() {
+            const fitMode = imageFitSelect.value;
+            const [presetW, presetH] = canvasPresetSelect.value.split(',').map(Number);
+            
+            if (!currentImage) {
+                currentWidth = presetW;
+                currentHeight = presetH;
+                return;
+            }
+            
+            if (fitMode === 'original') {
+                currentWidth = originalImageWidth;
+                currentHeight = originalImageHeight;
+            } else if (fitMode === 'cover' || fitMode === 'contain') {
+                const imgAspect = originalImageWidth / originalImageHeight;
+                const presetAspect = presetW / presetH;
+                if (fitMode === 'cover') {
+                    currentWidth = presetW;
+                    currentHeight = presetH;
+                } else {
+                    if (imgAspect > presetAspect) {
+                        currentWidth = presetW;
+                        currentHeight = Math.round(presetW / imgAspect);
+                    } else {
+                        currentHeight = presetH;
+                        currentWidth = Math.round(presetH * imgAspect);
+                    }
+                }
+            } else if (fitMode === 'stretch') {
+                currentWidth = presetW;
+                currentHeight = presetH;
+            }
+        }
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    currentImage = img;
+                    originalImageWidth = img.width;
+                    originalImageHeight = img.height;
+                    updateCanvasDimensions();
+                    dropZone.innerHTML = '';
+                    const imgEl = document.createElement('img');
+                    imgEl.src = e.target.result;
+                    dropZone.appendChild(imgEl);
+                    dropZone.classList.add('has-image');
+                    renderLines();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- Shared helpers ---
+
+        function computeBrightnessGrid() {
+            const columns = parseInt(columnsSlider.value);
+            const rows = parseInt(rowsSlider.value);
+            const contrast = parseInt(contrastSlider.value) / 100;
+            const quantizeLevels = parseInt(quantizeSlider.value);
+            const text = textInput.value.trim();
+            const fontSize = parseInt(fontSizeSlider.value);
+            const textColor = textColorPicker.value;
+            const textX = parseInt(textXSlider.value);
+            const textY = parseInt(textYSlider.value);
+            const fitMode = currentImage ? imageFitSelect.value : 'original';
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = currentWidth;
+            canvas.height = currentHeight;
+
+            ctx.fillStyle = bgColorPicker.value;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (currentImage) {
+                if (fitMode === 'stretch') {
+                    ctx.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
+                } else if (fitMode === 'cover') {
+                    const imgAspect = originalImageWidth / originalImageHeight;
+                    const canvasAspect = canvas.width / canvas.height;
+                    let sx, sy, sw, sh;
+                    if (imgAspect > canvasAspect) {
+                        sy = 0;
+                        sh = originalImageHeight;
+                        sw = Math.round(originalImageHeight * canvasAspect);
+                        sx = Math.round((originalImageWidth - sw) / 2);
+                    } else {
+                        sx = 0;
+                        sw = originalImageWidth;
+                        sh = Math.round(originalImageWidth / canvasAspect);
+                        sy = Math.round((originalImageHeight - sh) / 2);
+                    }
+                    ctx.drawImage(currentImage, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+                } else if (fitMode === 'contain') {
+                    const imgAspect = originalImageWidth / originalImageHeight;
+                    const canvasAspect = canvas.width / canvas.height;
+                    let dw, dh, dx, dy;
+                    if (imgAspect > canvasAspect) {
+                        dw = canvas.width;
+                        dh = Math.round(canvas.width / imgAspect);
+                    } else {
+                        dh = canvas.height;
+                        dw = Math.round(canvas.height * imgAspect);
+                    }
+                    dx = (canvas.width - dw) / 2;
+                    dy = (canvas.height - dh) / 2;
+                    ctx.drawImage(currentImage, dx, dy, dw, dh);
+                } else {
+                    ctx.drawImage(currentImage, 0, 0);
+                }
+            }
+
+            if (text) {
+                ctx.font = `${fontSize}px ${currentFontFamily}`;
+                ctx.fillStyle = textColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const x = (textX / 100) * currentWidth;
+                const y = (textY / 100) * currentHeight;
+                ctx.fillText(text, x, y);
+            }
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+
+            const cellWidth = canvas.width / columns;
+            const cellHeight = canvas.height / rows;
+
+            const grid = [];
+            for (let row = 0; row < rows; row++) {
+                const rowData = [];
+                for (let col = 0; col < columns; col++) {
+                    const startX = Math.floor(col * cellWidth);
+                    const startY = Math.floor(row * cellHeight);
+                    const endX = Math.floor((col + 1) * cellWidth);
+                    const endY = Math.floor((row + 1) * cellHeight);
+                    let totalBrightness = 0;
+                    let pixelCount = 0;
+                    for (let y = startY; y < endY && y < canvas.height; y++) {
+                        for (let x = startX; x < endX && x < canvas.width; x++) {
+                            const idx = (y * canvas.width + x) * 4;
+                            if (data[idx + 3] > 0) {
+                                totalBrightness += (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
+                                pixelCount++;
+                            }
+                        }
+                    }
+                    let brightness = pixelCount > 0 ? totalBrightness / pixelCount : 0;
+                    brightness = Math.min(255, Math.max(0, brightness * contrast));
+                    let nb = brightness / 255;
+                    nb = Math.max(0.05, nb);
+                    if (quantizeLevels > 0) nb = Math.round(nb * quantizeLevels) / quantizeLevels;
+                    if (pixelCount === 0) nb = -1;
+                    rowData.push(nb);
+                }
+                grid.push(rowData);
+            }
+
+            currentWidth = canvas.width;
+            currentHeight = canvas.height;
+            return { grid, cellWidth, cellHeight };
+        }
+
+        function drawLinesOnCanvas(ctx, w, h, grid, cellWidth, cellHeight, gap, animatedMaxThickness, lineColor, bgColor) {
+            if (!bgNoFill) {
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, w, h);
+            }
+            ctx.strokeStyle = lineColor;
+            ctx.lineCap = 'butt';
+            for (let r = 0; r < grid.length; r++) {
+                for (let c = 0; c < grid[r].length; c++) {
+                    const b = grid[r][c];
+                    if (b < 0) continue;
+                    const thickness = b * animatedMaxThickness;
+                    if (thickness <= 0) continue;
+                    const lineHeight = (cellHeight - gap) * 1.25;
+                    const x = c * cellWidth + cellWidth / 2;
+                    const y = r * cellHeight + gap / 2 - (lineHeight - (cellHeight - gap)) / 2;
+                    ctx.lineWidth = thickness;
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x, y + lineHeight);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // --- Static SVG render ---
+
+        function renderLines() {
+            if (previewAnimId) {
+                cancelAnimationFrame(previewAnimId);
+                previewAnimId = null;
+            }
+
+            const gap = parseInt(gapSlider.value);
+            const maxThickness = parseInt(maxThicknessSlider.value);
+            const lineColor = lineColorPicker.value;
+            const bgColor = bgColorPicker.value;
+
+            const { grid, cellWidth, cellHeight } = computeBrightnessGrid();
+            generateSVG(grid, cellWidth, cellHeight, gap, maxThickness, lineColor, bgColor);
+            outputContainer.innerHTML = '';
+            outputContainer.style.backgroundColor = bgColor;
+            outputContainer.insertAdjacentHTML('beforeend', svgString);
+
+            downloadBtn.disabled = false;
+            downloadPngBtn.disabled = false;
+            previewAnimBtn.disabled = false;
+            exportWebmBtn.disabled = false;
+        }
+
+        function generateSVG(grid, cellWidth, cellHeight, gap, maxThickness, lineColor, bgColor) {
+            const rows = grid.length;
+            const columns = grid[0].length;
+
+            svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${currentWidth} ${currentHeight}" preserveAspectRatio="xMidYMid meet" shape-rendering="crispEdges">`;
+            if (!bgNoFill) {
+                svgString += `<rect width="100%" height="100%" fill="${bgColor}"/>`;
+            }
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < columns; col++) {
+                    const brightness = grid[row][col];
+                    if (brightness < 0) continue;
+                    const thickness = brightness * maxThickness;
+                    const lineHeight = (cellHeight - gap) * 1.25;
+                    const x = col * cellWidth + cellWidth / 2;
+                    const y = row * cellHeight + gap / 2 - (lineHeight - (cellHeight - gap)) / 2;
+                    svgString += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y + lineHeight}" stroke="${lineColor}" stroke-width="${thickness}" stroke-linecap="butt"/>`;
+                }
+            }
+
+            svgString += '</svg>';
+        }
+
+        // --- Preview Animation ---
+
+        previewAnimBtn.addEventListener('click', () => {
+            if (!currentImage && !textInput.value.trim()) return;
+            if (previewAnimId) {
+                cancelAnimationFrame(previewAnimId);
+                previewAnimId = null;
+            }
+
+            const { grid, cellWidth, cellHeight } = computeBrightnessGrid();
+            const gap = parseInt(gapSlider.value);
+            const maxThickness = parseInt(maxThicknessSlider.value);
+            const lineColor = lineColorPicker.value;
+            const bgColor = bgColorPicker.value;
+            const duration = parseFloat(animDurationSlider.value) * 1000;
+
+            const containerRect = outputContainer.getBoundingClientRect();
+            const canvasAspect = currentWidth / currentHeight;
+            let canvasWidth, canvasHeight;
+            if ((containerRect.width - 40) / (containerRect.height - 40) > canvasAspect) {
+                canvasHeight = Math.max(containerRect.height - 40, 100);
+                canvasWidth = canvasHeight * canvasAspect;
+            } else {
+                canvasWidth = Math.max(containerRect.width - 40, 100);
+                canvasHeight = canvasWidth / canvasAspect;
+            }
+            const dpr = window.devicePixelRatio || 1;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = canvasWidth * dpr;
+            canvas.height = canvasHeight * dpr;
+            canvas.style.width = canvasWidth + 'px';
+            canvas.style.height = canvasHeight + 'px';
+            outputContainer.innerHTML = '';
+            outputContainer.style.backgroundColor = bgNoFill ? 'transparent' : bgColor;
+            outputContainer.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const scaledCellWidth = currentWidth > 0 ? cellWidth * (canvasWidth / currentWidth) : cellWidth;
+            const scaledCellHeight = currentHeight > 0 ? cellHeight * (canvasHeight / currentHeight) : cellHeight;
+
+            let startTime = null;
+
+            function animate(timestamp) {
+                if (startTime === null) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                drawLinesOnCanvas(ctx, canvasWidth, canvasHeight, grid, scaledCellWidth, scaledCellHeight, gap, maxThickness * progress, lineColor, bgColor);
+
+                if (progress < 1) {
+                    previewAnimId = requestAnimationFrame(animate);
+                } else {
+                    previewAnimId = null;
+                }
+            }
+
+            previewAnimId = requestAnimationFrame(animate);
+        });
+
+        // --- Downloads ---
+
+        downloadBtn.addEventListener('click', () => {
+            const blob = new Blob([svgString], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'line-visualization.svg';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        downloadPngBtn.addEventListener('click', () => {
+            const { grid } = computeBrightnessGrid();
+            const columns = parseInt(columnsSlider.value);
+            const rows = parseInt(rowsSlider.value);
+            const gap = parseInt(gapSlider.value);
+            const maxThickness = parseInt(maxThicknessSlider.value);
+            const lineColor = lineColorPicker.value;
+            const bgColor = bgColorPicker.value;
+
+            const cellW = currentWidth / columns;
+            const cellH = currentHeight / rows;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = currentWidth;
+            canvas.height = currentHeight;
+            const ctx = canvas.getContext('2d');
+
+            if (!bgNoFill) {
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, currentWidth, currentHeight);
+            }
+
+            ctx.strokeStyle = lineColor;
+            ctx.lineCap = 'butt';
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < columns; c++) {
+                    const b = grid[r]?.[c];
+                    if (b < 0 || b === undefined) continue;
+                    const thickness = b * maxThickness;
+                    if (thickness <= 0) continue;
+                    const lineHeight = (cellH - gap) * 1.25;
+                    const x = c * cellW + cellW / 2;
+                    const y = r * cellH + gap / 2 - (lineHeight - (cellH - gap)) / 2;
+                    ctx.lineWidth = thickness;
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x, y + lineHeight);
+                    ctx.stroke();
+                }
+            }
+
+            const link = document.createElement('a');
+            link.download = 'line-visualization.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // --- Export WebM ---
+
+        exportWebmBtn.addEventListener('click', () => {
+            if (!currentImage && !textInput.value.trim()) return;
+
+            const { grid, cellWidth: internalCellW, cellHeight: internalCellH } = computeBrightnessGrid();
+            const columns = parseInt(columnsSlider.value);
+            const rows = parseInt(rowsSlider.value);
+            const gap = parseInt(gapSlider.value);
+            const maxThickness = parseInt(maxThicknessSlider.value);
+            const lineColor = lineColorPicker.value;
+            const bgColor = bgColorPicker.value;
+            const growDuration = parseFloat(animDurationSlider.value) * 1000;
+            const holdDuration = 500;
+            const totalDuration = growDuration + holdDuration;
+
+            const exportW = currentWidth;
+            const exportH = currentHeight;
+            const exportScale = Math.max(1, 1920 / currentWidth);
+            const scaledW = Math.round(exportW * exportScale);
+            const scaledH = Math.round(exportH * exportScale);
+
+            const exportCellW = scaledW / columns;
+            const exportCellH = scaledH / rows;
+
+            const recCanvas = document.createElement('canvas');
+            recCanvas.width = scaledW;
+            recCanvas.height = scaledH;
+            const recCtx = recCanvas.getContext('2d');
+
+            const stream = recCanvas.captureStream(60);
+            let mimeType = 'video/webm;codecs=vp9';
+            if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = 'video/webm';
+
+            const recorder = new MediaRecorder(stream, {
+                mimeType,
+                videoBitsPerSecond: 50000000
+            });
+            const chunks = [];
+
+            recorder.ondataavailable = (e) => {
+                if (e.data.size > 0) chunks.push(e.data);
+            };
+
+            recorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'line-animation.webm';
+                a.click();
+                URL.revokeObjectURL(url);
+                exportWebmBtn.disabled = false;
+                exportWebmBtn.textContent = 'Export WebM';
+            };
+
+            exportWebmBtn.disabled = true;
+            exportWebmBtn.textContent = 'Exporting...';
+            recorder.start();
+
+            let startTime = null;
+
+            function drawFrame(timestamp) {
+                if (startTime === null) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / growDuration, 1);
+
+                drawLinesOnCanvas(recCtx, scaledW, scaledH, grid, exportCellW, exportCellH, gap, maxThickness * progress * exportScale, lineColor, bgColor);
+
+                if (elapsed < totalDuration) {
+                    requestAnimationFrame(drawFrame);
+                } else {
+                    setTimeout(() => recorder.stop(), 150);
+                }
+            }
+
+            requestAnimationFrame(drawFrame);
+        });
+
+        renderLines();
+    </script>
+</body>
+</html>
 
